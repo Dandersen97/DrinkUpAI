@@ -1,0 +1,368 @@
+{
+	"Options":[
+		{
+			"ID":"Snake Eyes",
+			"Desc":"First person to make eye contact with you drinks.",
+			"Icon":"snake",
+			"Color":"#63b598",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"For the love of God shut up",
+			"Desc":"You cannot talk until your next turn. You must drink for every word you said until then",
+			"Icon":"zipper-mouth",
+			"Color":"#97dce6",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Thumb Master",
+			"Desc":"Whenever you put your thumb on a table, the last person to also put their thumb down drinks. (this is a single use occurance, doesn't have to be right now)",
+			"Icon":"thumbs-up",
+			"Color":"#01ac53",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Girls Drink",
+			"Desc":"All girls drink",
+			"Icon":"taco",
+			"Color":"#d4ec84",
+			"MiniWheel":[1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 5]
+		},
+		{
+			"ID":"Keep Quite",
+			"Desc":"Do not read this aloud. First player to speak drinks.",
+			"Icon":"shush-face",
+			"Color":"#a2c9ef",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"The Judge",
+			"Desc":"You are now The Judge. You decide who drinks in ties and arguments. (this is a permanent effect until the next judge is spun)",
+			"Icon":"judge",
+			"Color":"#aeaeae",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Guys Drink",
+			"Desc":"All Guys Drink",
+			"Icon":"eggplant",
+			"Color":"#ceb4f3",
+			"MiniWheel":[1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 5]
+		},
+		{
+			"ID":"Drink",
+			"Desc":"Have a drink",
+			"Icon":"beer-mug",
+			"Color":"#9fd68c",
+			"MiniWheel":[1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 5]
+		},
+		{
+			"ID":"Social",
+			"Desc":"Cheers together and everyone drinks",
+			"Icon":"beer-mugs",
+			"Color":"#8cd6d0",
+			"MiniWheel":[1, 1, 1, 1, 2, 2]
+		},
+		{
+			"ID":"This or That",
+			"Desc":"Present 2 options for people to vote upon. All vote together and minority drinks. In a tie, everyone drinks",
+			"Icon":"opposite",
+			"Color":"#ef9292",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Mini Wheel",
+			"Desc":"Drink the Mini Wheel value",
+			"Icon":"multi-color-circle",
+			"Color":"#05d371",
+			"MiniWheel":[1,2,3,4,5,4,3,2]
+		},
+		{
+			"ID":"Repeat",
+			"Desc":"Do the same spin as the player just before you did",
+			"Icon":"repeat2",
+			"Color":"#9fb0f3",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Go Again",
+			"Desc":"Drink and go again.",
+			"Icon":"repeat-again",
+			"Color":"#f3ca9f",
+			"MiniWheel":[1, 1, 1, 1, 2, 2, 2, 3]
+		},
+		{
+			"ID":"Waterfall",
+			"Desc":"Start off a waterfall",
+			"Icon":"waterfall",
+			"Color":"#9fedf3",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Hello, My Name Is",
+			"Desc":"Take 1 drink for each syllable in your first name (no nicknames)",
+			"Icon":"hello-my-name-is",
+			"Color":"#f58686",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Shot",
+			"Desc":"Take a shot",
+			"Icon":"syringe",
+			"Color":"#c4c4c4",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Rock Paper Scissors",
+			"Desc":"Play rock paper scissors with another player, loser drinks. (1, 2, 3, Shoot)",
+			"Icon":"rock-paper-scissors",
+			"Color":"#86e98f",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Point!",
+			"Desc":"QUICK! Everyone point at another player. Everyone drinks for each person pointing at them",
+			"Icon":"pointing-hands",
+			"Color":"#99d4cf",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Lyric Time",
+			"Desc":"Choose any word. All players must sing a lyric that contains the word (no repeats). However, if nobody can come up with a song, then you must sing a song with that word or risk taking a drink for each other player.",
+			"Icon":"musical-notes",
+			"Color":"#d4a3e8",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Never Have I Ever",
+			"Desc":"Start a single turn of Never Have I Ever",
+			"Icon":"prohibited",
+			"Color":"#f58686",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Theres an App For That",
+			"Desc":"Pick a mobile phone app. All players who have that app drink. (no bullshit apps like calculator, notes, calendar, clock, etc)",
+			"Icon":"app",
+			"Color":"#d0ea9c",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Potty Time",
+			"Desc":"The player who last used the restroom drinks",
+			"Icon":"toilet",
+			"Color":"#f8f7e5",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Roll +1",
+			"Desc":"Permanently increase all your drinks by 1 (drink/give 1 is now drink/give 2, 2 is 3, etc) Reset back to 0 if you've already increased your drink count.",
+			"Icon":"dice",
+			"Color":"#ffb0b0",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Too Drunk To Handle",
+			"Desc":"Vote on what player is the most drunk. Give them a glass of water they must finish before drinking alchohol again. This water can count as their drink on spins.",
+			"Icon":"spiral-eyes",
+			"Color":"#bcb0ff",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Burn Up",
+			"Desc":"All smokers (and vapers) drink. Doesn't matter what is smoked, just smokers drink",
+			"Icon":"cigarette",
+			"Color":"#f5ca9d",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Finisher",
+			"Desc":"First player to finish their drink gets immunity for the next 5 spins. (Immunity means they dont have to drink when theyre supposed to and not affected by things like keep quiet, snake eyes, the judge, etc.)",
+			"Icon":"chequered-flag",
+			"Color":"#c4c4c4",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Baby",
+			"Desc":"Youngest player drinks. OR, if the youngest player spun this, drink 3 and grow the fuck up (or find a new younger player)",
+			"Icon":"baby",
+			"Color":"#fcc0f1",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Couples Retreat",
+			"Desc":"All couples cross arms with your significant other and drink together. If your significant other is not present, drink 2. 1 for them and 1 for you",
+			"Icon":"couple",
+			"Color":"#9ee6d1",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"All The Single Ladies (and guys)",
+			"Desc":"All single players cheers to being independent and drink together",
+			"Icon":"single",
+			"Color":"#deb7fc",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Hair Cut",
+			"Desc":"Choose shorter or longer. All players with hair shorter/longer than yours drink",
+			"Icon":"haircut",
+			"Color":"#ea86b4",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Self Sacrifice",
+			"Desc":"Drink X many times to your liking. Then give X many drinks for each drink you just drank.",
+			"Icon":"bloodHand",
+			"Color":"#f58686",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Full House",
+			"Desc":"Drink for each person living at your home (yourself, spouse, kids, roomates, siblings, etc)",
+			"Icon":"house",
+			"Color":"#7ddb78",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Fri-Yay!",
+			"Desc":"It's Friday! Drink 3! (if it's not Friday better just drink 1, you've probably got work tomorrow)",
+			"Icon":"party",
+			"Color":"#e5b0ff",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Fur Family",
+			"Desc":"Drink for each named pet you have",
+			"Icon":"paw-prints",
+			"Color":"#b0bcff",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Return To Sender",
+			"Desc":"All players, if you drank the last turn, give that many drinks",
+			"Icon":"return-to-sender",
+			"Color":"#ffe58f",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Where You Going?",
+			"Desc":"If you have shoes on take a drink",
+			"Icon":"shoe",
+			"Color":"#6473fa",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"What Are You Wearing?",
+			"Desc":"Everyone else close their eyes. Choose an article of clothing you're wearing and everyone guesses the color. Wrong guessers drink",
+			"Icon":"question",
+			"Color":"#7692ff",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Categories",
+			"Desc":"Pick the category and start a single round of Categories. First loser drinks.",
+			"Icon":"categories",
+			"Color":"#76ffe6",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Netflix and Chill",
+			"Desc":"Give 2 drinks for each streaming service you pay for. ALSO, Take 1 drink for each streaming service you have that someone else is paying for. (including but not limited to Netflix, Hulu, Disney+, Peacock, HBO Max, Amazon, Apple TV, Youtube TV, ESPN, Paramount+)",
+			"Icon":"tv",
+			"Color":"#fcff8f",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"A Little Bit of Variety",
+			"Desc":"Take 1 drink for each different type of drink of every player by brand name",
+			"Icon":"drinks",
+			"Color":"#ffb576",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Woop-woop! That's the sound of da police",
+			"Desc":"All players, last to put both their hand up takes 2 drinks",
+			"Icon":"hands-up",
+			"Color":"#fbff8c",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Dick in a Box",
+			"Desc":"Share the ultimate gift and give a drink (just give a drink. Don't actually give another player your dick in a box)",
+			"Icon":"giftInABox",
+			"Color":"#d3ff63",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Love Making",
+			"Desc":"All players who have had sex drink... And drink again if that was before marriage",
+			"Icon":"bedHearts",
+			"Color":"#ffb2fd",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Edumacated",
+			"Desc":"Drink based on your highest degree tier. GED: 1, Associates: 2, Bachelors: 3, Masters: 4, Doctorate: 5. (That'll teach you for learning)",
+			"Icon":"girl-graduation",
+			"Color":"#a8c5ef",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Movie Night",
+			"Desc":"Say aloud a movie you've seen before. All other players drink if they have <u>not</u> seen this movie.",
+			"Icon":"3d-movie",
+			"Color":"#f58686",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Roast",
+			"Desc":"All other players take a turn roasting the spinner. Then clink and drink together, its just a game.",
+			"Icon":"roast-chicken",
+			"Color":"#d59631",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"I like you, have a cupcake",
+			"Desc":"Give another player a compliment (and a drink)",
+			"Icon":"cupcake",
+			"Color":"#c0f2fb",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"SHOTgun Wedding",
+			"Desc":"Choose a partner. Then both of you cross arms and take a shot together. (Or you can both shotgun a drink instead)",
+			"Icon":"wedding-cake",
+			"Color":"#f3a3e8",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Mr Worldwide",
+			"Desc":"Give a drink for each foreign country you have visited (Layovers don't count)",
+			"Icon":"earth-face",
+			"Color":"#93ccff",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"Speak Easy",
+			"Desc":"Take a drink for each language you speak",
+			"Icon":"talking",
+			"Color":"#fbff8c",
+			"MiniWheel":[]
+		},		
+		{
+			"ID":"I am your Father (or Mother)",
+			"Desc":"Give a drink for each child you have",
+			"Icon":"vader",
+			"Color":"#a5a5a5",
+			"MiniWheel":[]
+		},
+		{
+			"ID":"ABC",
+			"Desc":"Choose before or after. All players with first names alphabetically before/after you drink",
+			"Icon":"abc",
+			"Color":"#cdf09c",
+			"MiniWheel":[]
+		}
+	]
+}

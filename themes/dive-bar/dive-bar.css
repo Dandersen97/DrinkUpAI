@@ -1,0 +1,15 @@
+:root[data-color-theme="dive-bar"]{
+  --bg: #0b0b0d;
+  --surface: #17161a;
+  --surface-2: #1f1d22;
+  --surface-hover: #28252b;
+  --border: rgba(255,255,255,0.1);
+  --border-strong: rgba(255,255,255,0.2);
+  --text: #ece9ea;
+  --text-soft: #aba5a9;
+  --text-dim: #746f73;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.65);
+  --accent: #d63b4a;
+  --amber: #dba13a;
+  --font-display: 'Special Elite', monospace;
+}

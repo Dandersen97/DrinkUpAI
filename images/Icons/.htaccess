@@ -1,0 +1,4 @@
+# Apache disables directory listing by default; svg-gallery.html needs one
+# for this folder (and its subfolders) to discover SVGs.
+Options +Indexes
+IndexOptions FancyIndexing HTMLTable SuppressIcon SuppressDescription SuppressLastModified SuppressSize

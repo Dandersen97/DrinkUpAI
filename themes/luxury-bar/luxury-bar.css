@@ -1,0 +1,15 @@
+:root[data-color-theme="luxury-bar"]{
+  --bg: #0e0d0c;
+  --surface: #171513;
+  --surface-2: #1f1c19;
+  --surface-hover: #272320;
+  --border: rgba(201,162,74,0.16);
+  --border-strong: rgba(201,162,74,0.28);
+  --text: #f5efe2;
+  --text-soft: #cabfa6;
+  --text-dim: #8c8171;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #c9a24a;
+  --amber: #c9a24a;
+  --font-display: 'Cinzel', serif;
+}

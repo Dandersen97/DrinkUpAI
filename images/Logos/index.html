@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<base href="/DrinkUp/"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>DrinkUP! - Game Menu</title>
+        <!-- Core theme CSS (includes Bootstrap)
+        <link href="css/menuStyles.css" rel="stylesheet" />-->
+		<!--<link href="css/bootstrap-5.2.0-dist/css/bootstrap.css" rel="stylesheet" />-->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+		<style>
+
+	
+			.modal-vis {
+				display: block;
+			}
+			
+			@media (min-width: 992px){
+			.w-lg-50 {
+				width: 50%;
+			}}
+
+			.gameContainer {
+                width: 100%;
+                position: relative;
+                display: flex;
+                align-items: stretch;
+                gap: 1rem;
+                transition: all 400ms;
+                overflow-y: scroll;
+                background: linear-gradient(.56deg, rgba(123, 157, 156, .25) 35%, rgba(123, 157, 156, 0));
+            }
+
+            .card2 {
+                flex: 1;
+                width: 100%;
+                min-width: 100px;
+                transition: all 400ms;
+                cursor: pointer;
+            }
+
+
+
+            .gameContainer:hover >
+            .card2:not(:hover) {
+                filter: grayscale(100%);
+            }
+            .card2:hover, .card2:active{
+                flex: 3;
+               min-width: 200px;
+               border: 1px solid black;
+            }
+
+            .active{
+                flex: 3;
+               min-width: 200px;
+               border: 1px solid black;
+            }
+		
+		</style>
+    </head>
+    <body>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Welcome To DrinkUP!</h1>
+                    <h5>Your hub for all games drinking. Some (as in most) games are disabled as they are not yet ready.</h5>
+					<h5>Remember, alcohol is a drug. Drink responsibly and never drink and drive.</h5>
+                    <p id="DescriptionArea">Select and game to learn more and start drinking!</p>
+					<p>(Pardon the placeholder images)</p>
+                </div>
+
+		<div id="GameSelection">
+		
+		</div>
+		<!--
+		<div id="ModalMoreInfoOrg" class="modal" style="hidden">
+			<h3 id="ModalMoreInfoHeader"></h3>
+			<div id="ModalMoreInfoSection"></div>
+			<button class="btn btn-secondary" onclick='ToggleModal("#ModalMoreInfo")'>CLOSE</button>
+			<a class="btn btn-primary" id="PlayButton">PLAY</a>
+		</div>
+		-->
+
+
+<div class="modal fade" id="ModalMoreInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalMoreInfoHeader">Game Name</h5>
+        <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+      </div>
+      <div class="modal-body">
+        <div class="text-center m-auto" style="max-width: 330px;">
+				<div class="row">
+					<img  id="ModalMoreInfoLogo" class="col-xl-4 col-xl-6 col-lg-6 col-md-3 col-sm-4 col-6 mx-auto" src="images\logos\1.svg" alt="" width="20%">
+				</div>
+				<div class="row" id="ModalMoreInfoSection"></div>
+			</div>
+      </div>
+      <div class="modal-footer">	
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+		<a class="btn btn-primary btn-large w-50" id="PlayButton">PLAY</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+		
+		
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/scripts/templateLoad.js"></script>
+	<!--<script src="/scripts/login.js"></script>-->
+<script>
+	var jsonData = JSON.parse(GetFile("GameInformation.json"));
+
+	
+	
+	var gameCount = jsonData.Games.length;
+	var gameSelection = document.getElementById("GameSelection");
+	var gameSelectionHtml = '<div class="row">';
+	console.log(gameCount);
+	
+	for (let i=1; i <= gameCount; i++){
+		gameSelectionHtml += '<div class="col-xl-4 col-xl-6 col-lg-6 col-md-3 col-sm-4 col-6 " onclick=\'SetActive("' + (i-1) + '")\' style="border: 1px solid black;">' +
+								//'<svg style="width: 100%;">' +
+									'<image class="w-lg-50" src="' + jsonData.Games[i-1].GameInfo.Img + '" style="float: left; transform-box: fill-box; transform-origin: center; ' + DrawDisabled(jsonData.Games[i-1].GameInfo.Active) + '";></image>' +
+								//'</svg>' +
+								
+								'<div class="d-lg-block d-sm-none d-none">' + '<h3>' + jsonData.Games[i-1].GameInfo.Name + '</h3><p>' + jsonData.Games[i-1].GameInfo.Desc + '</p></div>' +
+							'</div>';
+		if(i % 3 == 0){
+			//gameSelectionHtml += '</div><div class="row">';
+		}
+		if(i == gameCount){
+			gameSelectionHtml += '</div>';
+		}	
+		
+	}
+	gameSelection.innerHTML += gameSelectionHtml;
+	
+	
+	
+	
+	
+	function DrawDisabled(status){
+		var res = "";
+		if(!status){
+			res = 'filter: grayscale(100%); -webkit-filter: grayscale(100%);'
+		}
+		return res;
+	}
+	
+	
+	function GetFile(url){	
+		if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();
+				}
+				else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				var res = "";
+				xmlhttp.open("GET", url, false);
+				xmlhttp.send();
+				if(xmlhttp.status === 200){
+					res = xmlhttp.responseText;
+				}		
+		return res;
+	}
+	
+	function ToggleModal(mod){
+		$(mod).modal('show');
+	}
+
+	function PlayGame(jsonID){
+		console.log("Navigate to game " + jsonID);
+		window.location.href("www.fauxren.com\\" + jsonData.Games[jsonID].GameInfo.Link);
+	}
+	
+	
+	function SetActive(jsonID)
+    {	
+		var header = document.getElementById("ModalMoreInfoHeader");
+		var section = document.getElementById("ModalMoreInfoSection");
+		var logo = document.getElementById("ModalMoreInfoLogo");
+		var playButton = document.getElementById("PlayButton");
+		header.innerHTML = jsonData.Games[jsonID].GameInfo.Name;
+		section.innerHTML = jsonData.Games[jsonID].GameInfo.Desc;
+		logo.src = jsonData.Games[jsonID].GameInfo.Img;
+		//playButton.setAttribute('onclick', 'PlayGame("' + jsonID + '")');
+		playButton.setAttribute('href', jsonData.Games[jsonID].GameInfo.Link);
+		console.log(playButton);
+		ToggleModal("#ModalMoreInfo")
+	};
+	
+
+	
+	
+</script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+:root[data-color-theme="micro-brewery"]{
+  --bg: #f6f3e9;
+  --surface: #fffdf6;
+  --surface-2: #eee7d5;
+  --surface-hover: #e4dac1;
+  --border: rgba(55,50,20,0.12);
+  --border-strong: rgba(55,50,20,0.2);
+  --text: #282614;
+  --text-soft: #57523a;
+  --text-dim: #877f63;
+  --shadow-elevated: 0 24px 48px -24px rgba(50,45,15,0.2);
+  --accent: #5c7a3f;
+  --amber: #c98f3a;
+  --font-display: 'Quicksand', sans-serif;
+}

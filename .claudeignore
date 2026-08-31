@@ -1,0 +1,9 @@
+# Paths Claude Code should skip when building context for this project.
+
+.git/
+
+# images/Icons and images/Logos hold hundreds of SVG assets — keep the
+# folders themselves visible for path references, but don't pull every
+# file's contents into context. Matches any path two+ segments under
+# images/, so images/.gitkeep (directly in images/) stays included.
+images/*/*

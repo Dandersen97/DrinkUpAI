@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SVG Gallery</title>
+
+<style>
+  :root{
+    color-scheme: dark;
+    --bg: #14161c;
+    --card-bg: #1d2029;
+    --border: #2b2f3a;
+    --text: #e8e9ee;
+    --muted: #8b8fa3;
+    --accent: #6ea8fe;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
+    padding: 2rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  h1{
+    margin: 0 0 .25rem;
+    font-size: 1.5rem;
+  }
+  #status{
+    margin: 0 0 1.5rem;
+    color: var(--muted);
+    font-size: .95rem;
+  }
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .card{
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .75rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .thumb{
+    aspect-ratio: 1 / 1;
+    background: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .thumb img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+  .name{
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: .75rem;
+    color: var(--muted);
+    word-break: break-all;
+    text-align: center;
+  }
+  .notice{
+    max-width: 60ch;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    line-height: 1.5;
+  }
+  .notice code{
+    background: #0f1117;
+    padding: .1rem .35rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>SVG Gallery</h1>
+<p id="status">Scanning images/&hellip;</p>
+<div class="grid" id="grid"></div>
+
+<script src="scripts/utils.js"></script>
+<script>
+async function crawl(url, rootUrl) {
+  let entries;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    entries = [...doc.querySelectorAll("a[href]")].map(a => a.getAttribute("href"));
+  } catch (err) {
+    throw new Error(`Could not read directory listing for ${url}: ${err.message}`);
+  }
+
+  const svgs = [];
+  const subdirCrawls = [];
+
+  for (const href of entries) {
+    if (!href || href.startsWith("?") || href.startsWith("#")) continue;
+    const resolved = new URL(href, url);
+    // Must be a strict descendant of the directory just listed — excludes
+    // "Parent Directory" links, which every server emits and which would
+    // otherwise resolve back up into rootUrl and recurse forever.
+    if (!resolved.href.startsWith(url) || resolved.href === url) continue;
+
+    if (resolved.href.endsWith("/")) {
+      subdirCrawls.push(crawl(resolved.href, rootUrl));
+    } else if (/\.svg$/i.test(resolved.pathname)) {
+      svgs.push({
+        path: decodeURIComponent(resolved.href.slice(rootUrl.length)),
+        url: resolved.href
+      });
+    }
+  }
+
+  const nested = await Promise.all(subdirCrawls);
+  return svgs.concat(...nested);
+}
+
+async function init() {
+  const statusEl = document.getElementById("status");
+  const gridEl = document.getElementById("grid");
+  const rootUrl = new URL("images/Icons/", window.location.href).href;
+
+  let svgs;
+  try {
+    svgs = await crawl(rootUrl, rootUrl);
+  } catch (err) {
+    gridEl.remove();
+    statusEl.innerHTML = "";
+    const notice = document.createElement("div");
+    notice.className = "notice";
+    notice.innerHTML =
+      "Couldn't read the <code>images/Icons/</code> folder listing. This page needs Apache's directory " +
+      "listing (mod_autoindex) enabled for that folder — it won't work opened directly as a <code>file://</code> page, " +
+      "and Apache serves listings as 403 Forbidden by default.<br><br>" +
+      "A <code>.htaccess</code> with <code>Options +Indexes</code> is already included in " +
+      "<code>images/Icons/</code> for this. If it's still not working, check that your Apache vhost/site config " +
+      "allows <code>.htaccess</code> overrides there (<code>AllowOverride Indexes</code> or " +
+      "<code>AllowOverride All</code>), then reload the page.";
+    statusEl.replaceWith(notice);
+    return;
+  }
+
+  svgs.sort((a, b) => a.path.localeCompare(b.path));
+
+  statusEl.textContent = `${svgs.length} SVG${svgs.length === 1 ? "" : "s"} found in images/`;
+
+  if (svgs.length === 0) {
+    gridEl.innerHTML = "";
+    return;
+  }
+
+  gridEl.innerHTML = svgs.map(svg => `
+    <div class="card">
+      <div class="thumb"><img src="${escapeHtml(svg.url)}" alt="${escapeHtml(svg.path)}" loading="lazy"></div>
+      <div class="name">${escapeHtml(svg.path)}</div>
+    </div>
+  `).join("");
+}
+
+init();
+</script>
+</body>
+</html>

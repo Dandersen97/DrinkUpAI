@@ -1,0 +1,15 @@
+:root[data-color-theme="brewery"]{
+  --bg: #12100c;
+  --surface: #1a1712;
+  --surface-2: #221d16;
+  --surface-hover: #2b241a;
+  --border: rgba(196,130,58,0.18);
+  --border-strong: rgba(196,130,58,0.3);
+  --text: #f1ece1;
+  --text-soft: #c9b89b;
+  --text-dim: #93805f;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #c4823a;
+  --amber: #d99a4e;
+  --font-display: 'Oswald', sans-serif;
+}

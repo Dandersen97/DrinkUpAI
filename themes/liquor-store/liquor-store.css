@@ -1,0 +1,15 @@
+:root[data-color-theme="liquor-store"]{
+  --bg: #faf6ee;
+  --surface: #ffffff;
+  --surface-2: #f2eadb;
+  --surface-hover: #e9dfca;
+  --border: rgba(30,15,5,0.1);
+  --border-strong: rgba(30,15,5,0.2);
+  --text: #201408;
+  --text-soft: #56412c;
+  --text-dim: #8b7355;
+  --shadow-elevated: 0 24px 48px -24px rgba(40,20,5,0.22);
+  --accent: #c81e2c;
+  --amber: #cf9a34;
+  --font-display: 'Bebas Neue', sans-serif;
+}
