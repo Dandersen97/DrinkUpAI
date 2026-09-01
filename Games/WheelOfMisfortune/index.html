@@ -14,16 +14,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Cinzel:wght@600;700&family=MedievalSharp&family=Special+Elite&family=Bebas+Neue&family=Oswald:wght@500;600&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 
 <!-- Theme variables (base + specialty color themes) -->
-<link href="themes/base.css" rel="stylesheet">
-<link href="themes/luxury-bar/luxury-bar.css" rel="stylesheet">
-<link href="themes/fantasy-tavern/fantasy-tavern.css" rel="stylesheet">
-<link href="themes/dive-bar/dive-bar.css" rel="stylesheet">
-<link href="themes/liquor-store/liquor-store.css" rel="stylesheet">
-<link href="themes/brewery/brewery.css" rel="stylesheet">
-<link href="themes/micro-brewery/micro-brewery.css" rel="stylesheet">
+<link href="/themes/base.css" rel="stylesheet">
+<link href="/themes/luxury-bar/luxury-bar.css" rel="stylesheet">
+<link href="/themes/fantasy-tavern/fantasy-tavern.css" rel="stylesheet">
+<link href="/themes/dive-bar/dive-bar.css" rel="stylesheet">
+<link href="/themes/liquor-store/liquor-store.css" rel="stylesheet">
+<link href="/themes/brewery/brewery.css" rel="stylesheet">
+<link href="/themes/micro-brewery/micro-brewery.css" rel="stylesheet">
 
 <!-- Layout & component styles -->
-<link href="styles/main.css" rel="stylesheet">
+<link href="/styles/main.css" rel="stylesheet">
     </head>
 <body>
 <style>
@@ -203,7 +203,7 @@
 			//svg.innerHTML += '<path d="M ' + startPoint + ' L ' + fPoint + ' Q ' + qArc + ' ' + qPoint + ' L ' + startPoint + '" fill="blue" stroke="blue" stroke-width="1"/>'; //curved arc
 			spinner.innerHTML += '<g transform="translate(' + radius + ',' + radius + ') rotate(' + rotate + ')" style="filter: var(--filter-bright)">' + 
 							'<path d="M ' + startPoint + 'L ' + radius +' 0 A ' + radius + ' ' + radius + ' ' + ' 0 0 1 ' + qPointY + ' ' + qPointX + ' L ' + startPoint + '" fill="' + ActiveOptions.Options[i].Color + '" stroke="black" stroke-width="1" />' +							
-							'<image x="' + (imgX - (imgSize /2)) + '" y="' + (imgY - (imgSize /2)) + '" width="' + imgSize + 'px" height="' + imgSize + 'px" xlink:href="images/Icons/' + ActiveOptions.Options[i].Icon + '.svg" style="transform-box: fill-box; transform-origin: center; transform: rotate(95deg);"></image>' +
+							'<image x="' + (imgX - (imgSize /2)) + '" y="' + (imgY - (imgSize /2)) + '" width="' + imgSize + 'px" height="' + imgSize + 'px" xlink:href="/images/Icons/' + ActiveOptions.Options[i].Icon + '.svg" style="transform-box: fill-box; transform-origin: center; transform: rotate(95deg);"></image>' +
 							//'<circle cx="' + imgX + '" cy="' + imgY + '" r="5" fill="red"/>' +
 							'</g>'; //straight line
 			
