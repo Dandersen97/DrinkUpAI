@@ -241,7 +241,7 @@
 		//navigator.vibrate(100);
 		document.getElementById("MisfortuneModalTitle").innerHTML = ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].ID;
 		document.getElementById("MisfortuneModalDesc").innerHTML = ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].Desc;
-		document.getElementById("MisfortuneModalImg").src = 'images/Icons//' + ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].Icon + '.svg';
+		document.getElementById("MisfortuneModalImg").src = '/images/Icons//' + ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].Icon + '.svg';
 		
 		
 		//console.log(ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].MiniWheel);
@@ -288,7 +288,7 @@
 			//svg.innerHTML += '<path d="M ' + startPoint + ' L ' + fPoint + ' Q ' + qArc + ' ' + qPoint + ' L ' + startPoint + '" fill="blue" stroke="blue" stroke-width="1"/>'; //curved arc
 			document.getElementById("MisfortuneModalMiniWheel").innerHTML += '<g transform="translate(' + radius + ',' + radius + ') rotate(' + rotate + ')" style="filter: var(--filter-bright)">' + 
 							'<path d="M ' + startPoint + ' L ' + fPoint + ' L ' + qPoint + ' L ' + startPoint + '" fill="' + "#86e98f" + '" stroke="black" stroke-width="1" />' +							
-							'<image x="' + (imgX - (imgSize /2)) + '" y="' + (imgY - (imgSize /2)) + '" width="' + imgSize + 'px" height="' + imgSize + 'px" xlink:href="images/Numbers/' + ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].MiniWheel[i] + '.svg" style="transform-box: fill-box; transform-origin: center; transform: rotate(108deg);"></image>' +
+							'<image x="' + (imgX - (imgSize /2)) + '" y="' + (imgY - (imgSize /2)) + '" width="' + imgSize + 'px" height="' + imgSize + 'px" xlink:href="/images/Numbers/' + ActiveOptions.Options[Math.ceil((spinRemainer * 360) / diff) - 1].MiniWheel[i] + '.svg" style="transform-box: fill-box; transform-origin: center; transform: rotate(108deg);"></image>' +
 							//'<circle cx="' + imgX + '" cy="' + imgY + '" r="5" fill="red"/>' +
 							'</g>'; //straight line
 			

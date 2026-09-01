@@ -154,7 +154,7 @@ function gameDetailTemplate(game, index){
         </div>
         <div class="modal-game-desc">${game.long_desc}</div>
         <div class="modal-game-actions">
-          <a class="btn-play-full" href="${escapeHtml(game.url)}" target="_blank" rel="noopener">▶ Play ${escapeHtml(game.title)}</a>
+          <a class="btn-play-full" href="${escapeHtml(game.url)}" rel="noopener">Play ${escapeHtml(game.title)}</a>
         </div>
         <div class="modal-game-progress font-mono">${index + 1} / ${GAMES.length}</div>
       </div>
