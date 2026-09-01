@@ -1,4 +1,4 @@
-{
+spinData = {
 	"Options":[
 		{
 			"ID":"Snake Eyes",
