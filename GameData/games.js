@@ -1,7 +1,7 @@
 /* ==========================================================================
    GAME DATA
    This is the single source of truth for the hub. To add a game, push a
-   new object onto this array — the grid, chips, search, quick-jump menu
+   new object onto this array — the grid, chips, quick-jump menu
    and detail carousel all update automatically. No other code needs to
    change.
 
@@ -11,7 +11,7 @@
      short_desc  short blurb (1–2 sentences) — shown on the grid card
      long_desc   longer blurb (2–4 sentences) — shown in the detail modal
      categories  array of one or more category names — used for filter
-                 chips, search, and accent color grouping. A game can
+                 chips and accent color grouping. A game can
                  belong to several, e.g. ["Multiplayer", "Strategy"].
                  The first entry is treated as the primary category and
                  sets the card's accent color.
@@ -22,7 +22,7 @@
      url         where the modal's "Play" button should navigate to
      players     e.g. "1P", "1–2P", "1–4P"
      disabled    optional boolean — when true, the game is hidden
-                 entirely from the grid, search, chips, quick-jump nav,
+                 entirely from the grid, chips, quick-jump nav,
                  and detail carousel
    ========================================================================== */
 const GAMES = [
@@ -42,7 +42,7 @@ const GAMES = [
     title: "Wheel of Misfortune",
     short_desc: "Spin a wheel, enjoy the outcome",
     long_desc: "<p>A fun beginning of the night game. As its name suggests, you spin a wheel and enjoy the misfortune. You may have to drink, give a drink, take a dare, the possibilities are near endless as you can use our defaults or (eventually) enter your own wheel challenges.<br><br>Now with 50+ options!</p>",
-    categories: ["Social","Icebreaker","Multiplayer"],
+    categories: ["Social","Icebreaker"],
     image: "images/Logos/wheel_of_misfortune.svg",
     url: "Games/WheelOfMisfortune/",
     players: "2P+",
@@ -53,7 +53,7 @@ const GAMES = [
     title: "Drunk Artist",
     short_desc: "Draw bad pictures and have fun",
     long_desc: "<p>Ever wonder if you have a hidden talent that only comes out when drunk? Well find out if it is art here! 1 person is given an image and must tell all other players how to draw it. Catch is the artists can't see their art, they must remember what they drew and where. Drinking comes into play when guessing their art. Always fun to compare art to eachother and the original piece.</p>",
-    categories: ["Multiplayer", "BestWithFriends"],
+    categories: ["BestWithFriends"],
     image: "images/Logos/drunk_artist.svg",
     url: "#",
     players: "2P+",
@@ -64,7 +64,7 @@ const GAMES = [
     title: "DrinkUp TV",
     short_desc: "Better Multiplayer Games",
     long_desc: "<p>Secondary hub for multiplayer DrinkUp games. A host on the tv and all other players join on their own phone. Similiar to how the Jackbox Party Pack games work.</p>",
-    categories: ["Multiplayer"],
+    categories: ["Social"],
     image: "images/Logos/tv.svg",
     url: "#",
     players: "2P+",
@@ -75,7 +75,7 @@ const GAMES = [
     title: "Memory",
     short_desc: "It's Memory",
     long_desc: "<p>Just like the childrens game but with alcohol. A grid is layed before you of facedown cards. You must pick 2 cards and if they match remove them from the game and give a the drink the match says, and go again. If they differ, take the drink, turn them back face down, and it's the next players turn to pick. Sometimes there's multiple matches for a set of cards.</p>",
-    categories: ["Multiplayer", "Casual"],
+    categories: ["Casual"],
     image: "images/Logos/memory.svg",
     url: "#",
     players: "2P+",
@@ -86,7 +86,7 @@ const GAMES = [
     title: "Memory 2",
     short_desc: "Alternative Memory",
     long_desc: "<p>An alternate form of Memory. 12 cards will be shown to you. You have 5 seconds to memorize them before being flipped over. Then, the center large card will be revealed. It is your job to flip over the matching tile.</p>",
-    categories: ["Multiplayer", "Casual"],
+    categories: ["Casual"],
     image: "images/Logos/memory2.svg",
     url: "#",
     players: "2P+",
@@ -97,9 +97,9 @@ const GAMES = [
     title: "Scratch N Drink",
     short_desc: "Competitive lucky lottery drinking",
     long_desc: "<p>Best played with 2-3 people and a shot. A grid of covered tiles is layed before you, each player takes a turn and scratches off a tile to reveal what is underneath. Based upon the revealed tile, that player may have to drink 1, 2, go again, or be safe (do nothing). BUT, theres the crossbones. The player that reveals that has to take the shot and a new game can be started with a new shot. When playing with more than 2 people it is recomended to incease the crossbone count so when one player scratches it off the others can keep going on the same game.</p>",
-    categories: ["Multiplayer","Shots"],
-    image: "images/Logos/scratch_n_drink.svg",
-    url: "#",
+    categories: ["Shots"],
+    image: "/images/Logos/scratch_n_drink.svg",
+    url: "/Games/ScratchNDrink/",
     players: "2P",
     disabled: false
   },
@@ -119,7 +119,7 @@ const GAMES = [
     title: "Battleshot",
     short_desc: "Battleship, but with shots",
     long_desc: "<p>Based on the board game Battleship. 2 player lay out drinks on a board and take turns guessing where their opponents drinks are. If they guess right, your opponent drinks. If wrong, next players turn and hope they guess wrong too.</p>",
-    categories: ["Multiplayer","Shots"],
+    categories: ["Shots"],
     image: "images/Logos/battleshot.svg",
     url: "#",
     players: "2P",

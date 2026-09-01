@@ -32,29 +32,6 @@
 <!-- ============ TOP BAR (injected by scripts/topbar.js) ============ -->
 <div id="topbar-root"></div>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-eyebrow font-mono">Free Edition</div>
-    <h1 class="hero-title">Pick a game and start drinking!</h1>
-    <p class="hero-sub">By accessing this site you acknowledge you are of the legal drinking age. DrinkUp is a social collection of games, primarily focused on the consuption of alcohol. Participation is soley voluntarily. We are not responsible for your actions and it is the players choice in how to play these games.</p>
-
-    <div class="chip-row d-flex flex-wrap gap-2" id="chipRow"></div>
-  </div>
-</section>
-
-<!-- ============ GRID ============ -->
-<section class="grid-section">
-  <div class="container">
-    <div class="row g-4" id="gameGrid"></div>
-
-    <div class="empty-state" id="emptyState">
-      <div class="glyph">🎮</div>
-      <div>No matches — try a different category</div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2">
     <span>DrinkUp! — built with Bootstrap 5 · rendered from JSON</span>
@@ -96,7 +73,7 @@
 <script defer src="scripts/topbar.js"></script>
 <script defer src="scripts/theme.js"></script>
 <script defer src="scripts/render.js"></script>
-<script defer src="scripts/app.js" onload="buildChips(); renderGrid();"></script>
+<script defer src="scripts/app.js"></script>
 
 </body>
 </html>

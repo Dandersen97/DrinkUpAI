@@ -1,10 +1,8 @@
-const state = { search: "", category: "All", showDisabled: false };
+const state = { category: "All" };
 
-/* Games with disabled: true are excluded from the main grid, chips,
-   quick-jump nav, and the game count — they only ever appear in the
-   greyed-out "Unavailable games" section, and only when that's toggled on. */
+/* Games with disabled: true are excluded everywhere — grid, chips,
+   quick-jump nav, game count, and the detail carousel. */
 const VISIBLE_GAMES = GAMES.filter(g => !g.disabled);
-const DISABLED_GAMES = GAMES.filter(g => g.disabled);
 
 /* The first category in a game's list sets its primary accent color */
 function primaryColor(game){
@@ -34,20 +32,16 @@ function buildChips(){
       state.category = btn.dataset.cat;
       buildChips();
       renderGrid();
-      renderDisabledGrid();
     });
   });
 }
 
 /* ---------------- Game grid cards ---------------- */
-function cardTemplate(game, isDisabled){
+function cardTemplate(game){
   const color = primaryColor(game);
-  const cardClass = isDisabled ? "game-card is-disabled" : "game-card";
-  const badge = isDisabled ? `<span class="disabled-badge">Unavailable</span>` : "";
   return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-      <div class="${cardClass}" style="--accent-cat:${color}" data-id="${escapeHtml(game.id)}" role="button" tabindex="0" aria-haspopup="dialog">
-        ${badge}
+      <div class="game-card" style="--accent-cat:${color}" data-id="${escapeHtml(game.id)}" role="button" tabindex="0" aria-haspopup="dialog">
         <div class="card-image-wrap">
           <img class="card-image" src="${escapeHtml(game.image)}" alt="${escapeHtml(game.title)} cover art" loading="lazy">
         </div>
@@ -68,19 +62,12 @@ function cardTemplate(game, isDisabled){
 function renderGrid(){
   const grid = document.getElementById("gameGrid");
   const empty = document.getElementById("emptyState");
-  const q = state.search.trim().toLowerCase();
 
-  const filtered = VISIBLE_GAMES.filter(g => {
-    const matchesCategory = state.category === "All" || g.categories.includes(state.category);
-    const matchesSearch = !q ||
-      g.title.toLowerCase().includes(q) ||
-      g.short_desc.toLowerCase().includes(q) ||
-      g.long_desc.toLowerCase().includes(q) ||
-      g.categories.some(cat => cat.toLowerCase().includes(q));
-    return matchesCategory && matchesSearch;
-  });
+  const filtered = VISIBLE_GAMES.filter(g =>
+    state.category === "All" || g.categories.includes(state.category)
+  );
 
-  grid.innerHTML = filtered.map(g => cardTemplate(g, false)).join("");
+  grid.innerHTML = filtered.map(g => cardTemplate(g)).join("");
   empty.style.display = filtered.length === 0 ? "block" : "none";
   document.getElementById("gameCount").textContent = VISIBLE_GAMES.length;
 
@@ -94,49 +81,6 @@ function renderGrid(){
     });
   });
 }
-
-/* ---------------- Disabled games (shown via navbar toggle) ---------------- */
-function renderDisabledGrid(){
-  const section = document.getElementById("disabledSection");
-  const grid = document.getElementById("disabledGameGrid");
-  const q = state.search.trim().toLowerCase();
-
-  const filtered = DISABLED_GAMES.filter(g => {
-    const matchesCategory = state.category === "All" || g.categories.includes(state.category);
-    const matchesSearch = !q ||
-      g.title.toLowerCase().includes(q) ||
-      g.short_desc.toLowerCase().includes(q) ||
-      g.long_desc.toLowerCase().includes(q) ||
-      g.categories.some(cat => cat.toLowerCase().includes(q));
-    return matchesCategory && matchesSearch;
-  });
-
-  grid.innerHTML = filtered.map(g => cardTemplate(g, true)).join("");
-  section.hidden = !state.showDisabled || DISABLED_GAMES.length === 0;
-
-  grid.querySelectorAll(".game-card").forEach(card => {
-    card.addEventListener("click", () => openGameModalById(card.dataset.id));
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " "){
-        e.preventDefault();
-        openGameModalById(card.dataset.id);
-      }
-    });
-  });
-}
-
-function initShowDisabled(){
-  let saved = null;
-  try { saved = localStorage.getItem("playbase-show-disabled"); } catch (e) { /* storage unavailable */ }
-  state.showDisabled = saved === "1";
-  document.getElementById("showDisabledSwitch").checked = state.showDisabled;
-}
-
-document.getElementById("showDisabledSwitch").addEventListener("change", (e) => {
-  state.showDisabled = e.target.checked;
-  try { localStorage.setItem("playbase-show-disabled", state.showDisabled ? "1" : "0"); } catch (e) { /* storage unavailable */ }
-  renderDisabledGrid();
-});
 
 /* ---------------- Game detail modal + carousel ---------------- */
 function gameDetailTemplate(game, index){
@@ -156,7 +100,7 @@ function gameDetailTemplate(game, index){
         <div class="modal-game-actions">
           <a class="btn-play-full" href="${escapeHtml(game.url)}" rel="noopener">Play ${escapeHtml(game.title)}</a>
         </div>
-        <div class="modal-game-progress font-mono">${index + 1} / ${GAMES.length}</div>
+        <div class="modal-game-progress font-mono">${index + 1} / ${VISIBLE_GAMES.length}</div>
       </div>
     </div>
   `;
@@ -167,7 +111,7 @@ let gameModalInstance = null;
 
 function buildGameCarousel(){
   const inner = document.getElementById("gameCarouselInner");
-  inner.innerHTML = GAMES.map((g, i) => gameDetailTemplate(g, i)).join("");
+  inner.innerHTML = VISIBLE_GAMES.map((g, i) => gameDetailTemplate(g, i)).join("");
   gameCarouselInstance = new bootstrap.Carousel(document.getElementById("gameCarousel"), {
     interval: false, ride: false, touch: true, wrap: true
   });
@@ -180,7 +124,7 @@ function setActiveSlide(index){
 }
 
 function openGameModalById(id){
-  const index = GAMES.findIndex(g => g.id === id);
+  const index = VISIBLE_GAMES.findIndex(g => g.id === id);
   if (index === -1) return;
   setActiveSlide(index);
   gameModalInstance.show();
@@ -215,10 +159,3 @@ function buildNavIconCarousel(){
     });
   });
 }
-
-/* ---------------- Search ---------------- */
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  state.search = e.target.value;
-  renderGrid();
-  renderDisabledGrid();
-});

@@ -99,16 +99,6 @@ function renderTopbar(){
           </li>
           <li>
             <div class="dropdown-item-text">
-              <div class="settings-row">
-                <span>Show disabled games</span>
-                <span class="form-check form-switch m-0">
-                  <input class="form-check-input" type="checkbox" id="showDisabledSwitch">
-                </span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="dropdown-item-text">
               <div class="settings-row-column">
                 <span>Theme</span>
                 <select class="theme-select" id="themeSelect">
