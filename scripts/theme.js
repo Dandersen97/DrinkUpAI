@@ -17,27 +17,52 @@ const AMBIENT_ICONS = {
               "images/Icons/whiskeyGlass.svg", 
               "images/Icons/wineBottle.svg",
               "images/Icons/wineBottleAndGlass2.svg",
-              "images/Icons/wineGlass2.svg",  ],
+              "images/Icons/wineGlass2.svg",
+              "images/Icons/bottles.svg",
+              "images/Icons/champagne.svg",
+              "images/Icons/champagne3.svg",
+              "images/Icons/cocktail.svg",
+              "images/Icons/cocktail2.svg"  ],
   "luxury-bar": ["images/Icons/martiniGlasses.svg", 
                  "images/Icons/whiskeyGlass.svg", 
-                 "images/Icons/wineBottleAngGlass2.svg"],
+                 "images/Icons/wineBottleAndGlass2.svg",
+                 "images/Icons/bar2.svg",
+                 "images/Icons/bar3.svg",
+                 "images/Icons/champagne.svg",
+                 "images/Icons/champagne2.svg",
+                 "images/Icons/cocktail2.svg",
+                 "images/Icons/drinks.svg",
+                 "images/Icons/partyChampagne.svg",
+                 "images/Icons/whiskey3.svg"],
   "fantasy-tavern": ["images/Icons/beerStein.svg",
                      "images/Icons/paper.svg",
-                     "images/Icons/roast-chicken.svg"
-  ],
-  "dive-bar": ["images/Icons/beer-mub.svg",
+                     "images/Icons/roast-chicken.svg",
+                     "images/Icons/bar.svg",
+                     "images/Icons/barSign.svg",
+                     "images/Icons/bottles2.svg",
+                     "images/Icons/bottles3.svg",
+                     "images/Icons/keg.svg"],
+  "dive-bar": ["images/Icons/beer-mug.svg",
                "images/Icons/cigarette.svg",
-               "images/Icons/WhiskeyAndGlasses.svg"
-  ],
-  "liquor-store": ["images/Icons/beer-mub.svg",
-                   "images/Icons/cigarette.svg",
-                   "images/Icons/WhiskeyAndGlasses.svg"],
-  "brewery": ["images/Icons/beer-mub.svg",
-              "images/Icons/cigarette.svg",
-              "images/Icons/WhiskeyAndGlasses.svg"],
-  "micro-brewery": ["images/Icons/beer-mub.svg",
-                    "images/Icons/cigarette.svg",
-                    "images/Icons/WhiskeyAndGlasses.svg"]
+               "images/Icons/WhiskeyAndGlasses.svg",
+               "images/Icons/bar.svg",
+               "images/Icons/bar4.svg",
+               "images/Icons/bar5.svg",
+               "images/Icons/barStool.svg",
+               "images/Icons/bottles5.svg",
+               "images/Icons/crackedGlass.svg"],
+  "micro-brewery": ["images/Icons/beer-mug.svg",
+                    "images/Icons/beerGlassAndPitcher.svg",
+                    "images/Icons/can2.svg",
+                    "images/Icons/bottle3pack4.svg",
+                    "images/Icons/hops.svg",
+                    "images/Icons/hops.svg",
+                    "images/Icons/hops.svg",
+                    "images/Icons/bar5.svg",
+                    "images/Icons/hops.svg",
+                    "images/Icons/tank1.svg",
+                    "images/Icons/tank2.svg"
+                ]
 };
 
 /* ---------------- Theme (light / dark) ---------------- */
@@ -117,8 +142,8 @@ function rerollAmbientIcon(img){
 function applyColorTheme(theme){
   document.documentElement.setAttribute("data-color-theme", theme);
   const isDefault = theme === "default";
-  document.getElementById("themeToggle").disabled = !isDefault;
-  document.getElementById("darkModeSwitch").disabled = !isDefault;
+  //document.getElementById("themeToggle").disabled = !isDefault;
+  //document.getElementById("darkModeSwitch").disabled = !isDefault;
   buildAmbientLayer(theme);
   try { localStorage.setItem("playbase-color-theme", theme); } catch (e) { /* storage unavailable */ }
 }

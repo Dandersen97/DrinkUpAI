@@ -106,8 +106,6 @@ function renderTopbar(){
                   <option value="luxury-bar">Luxury Bar</option>
                   <option value="fantasy-tavern">Fantasy Tavern</option>
                   <option value="dive-bar">Dive Bar</option>
-                  <option value="liquor-store">Liquor Store</option>
-                  <option value="brewery">Brewery</option>
                   <option value="micro-brewery">Micro Brewery</option>
                 </select>
               </div>

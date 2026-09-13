@@ -1,4 +1,4 @@
-:root[data-color-theme="micro-brewery"]{
+:root[data-color-theme="micro-brewery"][data-theme="light"]{
   --bg: #f6f3e9;
   --surface: #fffdf6;
   --surface-2: #eee7d5;
@@ -13,3 +13,26 @@
   --amber: #c98f3a;
   --font-display: 'Quicksand', sans-serif;
 }
+
+
+/* ---------- Dark theme (default) ---------- */
+:root[data-color-theme="micro-brewery"][data-theme="dark"]{
+  --bg: #0c0e13;
+  --surface: #15181f;
+  --surface-2: #1b1f28;
+  --surface-hover: #20242f;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+  --text: #f2f3f6;
+  --text-soft: #57523a;
+  --text-dim: #877f63;
+  --shadow-color: rgba(0,0,0,0.45);
+  --shadow-elevated: 0 20px 45px -20px rgba(0,0,0,0.55);
+  --overlay-tint: rgba(255,255,255,0.02);
+  --filter-bright: brightness(0.65);
+    --accent: #5c7a3f;
+  --amber: #c98f3a;
+  --font-display: 'Quicksand', sans-serif;
+
+}
+

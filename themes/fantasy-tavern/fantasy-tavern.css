@@ -1,4 +1,21 @@
-:root[data-color-theme="fantasy-tavern"]{
+:root[data-color-theme="fantasy-tavern"][data-theme="light"]{
+  --bg: #f6f3e9;
+  --surface: #fffdf6;
+  --surface-2: #eee7d5;
+  --surface-hover: #e4dac1;
+  --border: rgba(214,158,89,0.2);
+  --border-strong: rgba(214,158,89,0.32);
+  --text: #523500;
+  --text-soft: #5a4520;
+  --text-dim: #bb9657;
+  --shadow-elevated: 0 24px 48px -22px rgba(20,10,0,0.6);
+  --accent: #c97a2f;
+  --amber: #e0a53e;
+  --font-display: 'MedievalSharp', cursive;
+}
+
+
+:root[data-color-theme="fantasy-tavern"][data-theme="dark"]{
   --bg: #1c130c;
   --surface: #241a10;
   --surface-2: #2c2013;
