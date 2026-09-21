@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>DrinkUp!</title>
+<title>About — DrinkUp!</title>
 
 <!-- Bootstrap 5 via jsDelivr -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,29 +35,32 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <div class="hero-eyebrow font-mono">Free Edition</div>
-    <h1 class="hero-title">Pick a game and start drinking!</h1>
-    <p class="hero-sub">By accessing this site you acknowledge you are of the legal drinking age. DrinkUp is a social collection of games, primarily focused on the consuption of alcohol. Participation is soley voluntarily. We are not responsible for your actions and it is the players choice in how to play these games.</p>
-
-    <div class="chip-row d-flex flex-wrap gap-2" id="chipRow"></div>
+    <div class="hero-eyebrow font-mono">About</div>
+    <h1 class="hero-title">What is DrinkUp?</h1>
   </div>
 </section>
 
-<!-- ============ GRID ============ -->
-<section class="grid-section">
+<!-- ============ CONTENT ============ -->
+<section class="content-section">
   <div class="container">
-    <div class="row g-4" id="gameGrid"></div>
+    <div class="content-card">
+      <h2>The short version</h2>
+      <p>DrinkUp is a free collection of party and drinking games — No accounts, no installs, no ads. We're just here to help you have a good time.</p>
 
-    <div class="empty-state" id="emptyState">
-      <div class="glyph">🎮</div>
-      <div>No matches — try a different category</div>
+      <h2>The long answer</h2>
+      <p>During Covid, we had nothing better to do than drink and play games online with friends. Almost instantly we started combining the two and were quickly annoyed with all the "free" online drinking games out there. Basically none of them were free. Free to download or make an account sure, but all had those little microtransactions everyone hates.</p>
+      <p>Around the same time our annual renaissance festival got cancelled due to Covid. So naturally we hosted our own private party instead. All dressed up in essentially larp gear, drinking, having a wholesome time when an idea sparked. We're all dressed up like RPG characters, what if our beer was experience to level up? Like 5% abv is 5xp. Once the hangover wore off, Drinking Levels was born. What would become the first game that would later be DrinkUp!</p>
+      <p>With the joy that was developing Drinking Levels, it didn't take much to create our own versions of drinking games. Wheel of Misfortune was quickly added to the list and we needed a new name since Drinking Levels didn't apply to this. Alas DrinkUp! was officially created.</p>
+      <p>We now had our own little private collection of games we wanted to share with the world. But we also have morals. So DrinkUp was released under the promise of free to everyone forever. We're not in it for riches or glory (although that would be nice). We just enjoy social drinking games and want other to have the same fun experience we do.</p>
+
+      <h2>Play responsibly</h2>
+      <p>DrinkUp is intended for players of legal drinking age. Participation is entirely voluntary, and how a game is played (and how much is consumed while playing it) is always the players' own choice.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER (injected by scripts/footer.js) ============ -->
 <div id="footer-root"></div>
-
 
 <!-- Bootstrap JS via jsDelivr -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -69,7 +72,7 @@
 <script defer src="scripts/footer.js"></script>
 <script defer src="scripts/theme.js"></script>
 <script defer src="scripts/render.js"></script>
-<script defer src="scripts/app.js" onload="buildChips(); renderGrid();"></script>
+<script defer src="scripts/app.js"></script>
 
 </body>
 </html>

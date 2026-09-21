@@ -43,7 +43,7 @@ function renderTopbar(){
 <header class="topbar">
   <div class="container d-flex align-items-center justify-content-between py-3 gap-3">
     <div class="brand">
-    <a href="#" class="brand-logo-link">
+    <a href="/" class="brand-logo-link">
     <svg class="brand-logo" viewBox="0 0 2036 1325" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,-239.959,-1662.42)" style="fill:var(--text)" > 
         <g transform="matrix(1,0,0,1,-63.4497,743.268)" >
@@ -59,10 +59,6 @@ function renderTopbar(){
     </div>
 
     <div class="d-flex align-items-center gap-2">
-      <div class="ticker font-mono d-none d-sm-block me-1">
-        <strong id="gameCount">0</strong> games
-      </div>
-
       <button class="icon-btn" type="button" id="themeToggle" aria-label="Toggle light and dark mode">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -132,6 +128,32 @@ function renderTopbar(){
   </div>
 </header>
 `;
+
+  const carousel =  `<div class="modal fade" id="gameModal" tabindex="-1" aria-hidden="true" aria-labelledby="gameModalLabel">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <span id="gameModalLabel" class="visually-hidden">Game details</span>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0 pt-1">
+        <div id="gameCarousel" class="carousel slide" data-bs-touch="true">
+          <div class="carousel-inner" id="gameCarouselInner"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#gameCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous game</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#gameCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next game</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+  document.body.insertAdjacentHTML('beforeend',carousel);
+  
   document.getElementById("brandGameName").textContent = currentGameName();
   wireMenuModalButton("gameSettingsMenuItem", "gameSettingsModal");
   wireMenuModalButton("howToPlayMenuItem", "gameHowToPlayModal");

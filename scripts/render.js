@@ -69,7 +69,6 @@ function renderGrid(){
 
   grid.innerHTML = filtered.map(g => cardTemplate(g)).join("");
   empty.style.display = filtered.length === 0 ? "block" : "none";
-  document.getElementById("gameCount").textContent = VISIBLE_GAMES.length;
 
   grid.querySelectorAll(".game-card").forEach(card => {
     card.addEventListener("click", () => openGameModalById(card.dataset.id));

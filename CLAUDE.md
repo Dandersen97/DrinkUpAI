@@ -6,6 +6,12 @@ A static, no-build-step game-hub page ("Playbase") — a single `index.html` sty
 
 ```
 index.html              Markup only — links to CSS, then loads scripts in order at the bottom of <body>
+about.html              Placeholder About page — static synopsis of the site, linked from the footer
+devlog.html             Placeholder Devlog page — expandable (accordion) history of site changes,
+                          rendered from DevlogData/devlog.js by scripts/devlog.js
+DevlogData/
+  devlog.js              const DEVLOG = [...] — single source of truth for devlog.html's entries.
+                          Push new entries (newest first) with date/title/body; no other code changes needed.
 styles/
   main.css               Layout & component CSS (topbar, hero, chips, cards, modals, footer, animations, media queries)
 themes/
@@ -21,6 +27,10 @@ scripts/
   topbar.js               Injects the shared top bar (brand, theme toggle, settings/menu dropdown,
                           quick-jump carousel) into <div id="topbar-root"> — the one place its markup
                           lives, so any page can pull in the identical top bar with a single script tag
+  footer.js                Injects the shared footer (tagline, page nav, copyright year) into
+                          <div id="footer-root"> — same pull-in-with-one-script-tag pattern as
+                          topbar.js. Nav links are root-absolute ("/index.html" etc.) so the footer
+                          also works from a page nested under Games/<name>/
   theme.js                Light/dark toggle, specialty color-theme switching, reduce-motion switch, and
                           the ambient floating icons — each icon re-rolls its image/size/vertical
                           position/speed every time it finishes floating across the screen
@@ -28,6 +38,8 @@ scripts/
                           VISIBLE_GAMES (GAMES filtered to disabled: false/absent). Disabled games
                           are excluded everywhere; there is no way to view them in the UI.
   app.js                  Init sequence only — calls the init functions from theme.js/render.js in order
+  devlog.js                Builds the Bootstrap accordion on devlog.html from DevlogData/devlog.js —
+                          only loaded on that page
 images/
   Icons/                 ~130 SVG icons (plus a nested Subimage/ folder) — general icon art
   Logos/                 Per-game logo SVGs, named to match games in GameData/games.js
@@ -39,7 +51,7 @@ svg-gallery.html        Standalone dev utility — not linked from index.html or
                           to run (directory-listing fetch fails when opened over file://).
 ```
 
-Scripts are loaded as plain global-scope files via ordered `<script defer>` tags (no ES modules), so the page keeps working when opened directly by double-click. Load order matters: `GameData/games.js` → `scripts/utils.js` → `scripts/topbar.js` → `scripts/theme.js` → `scripts/render.js` → `scripts/app.js` — each depends on globals (or DOM elements) defined by the one before it. `topbar.js` must run before `theme.js`/`render.js` since those attach listeners to top-bar elements at top level, not inside a `DOMContentLoaded` handler.
+Scripts are loaded as plain global-scope files via ordered `<script defer>` tags (no ES modules), so the page keeps working when opened directly by double-click. Load order matters: `GameData/games.js` → `scripts/utils.js` → `scripts/topbar.js` → `scripts/footer.js` → `scripts/theme.js` → `scripts/render.js` → `scripts/app.js` — each depends on globals (or DOM elements) defined by the one before it. `topbar.js` must run before `theme.js`/`render.js` since those attach listeners to top-bar elements at top level, not inside a `DOMContentLoaded` handler. `footer.js` has no dependencies of its own — it's grouped next to `topbar.js` since both just inject shared chrome — but every page needs a `<div id="footer-root"></div>` in its markup for it to render into.
 
 ## Conventions
 

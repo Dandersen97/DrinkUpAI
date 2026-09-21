@@ -1,0 +1,312 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<title>Scratch N' Drink</title>
+		<!-- Bootstrap 5 via jsDelivr -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Cinzel:wght@600;700&family=MedievalSharp&family=Special+Elite&family=Bebas+Neue&family=Oswald:wght@500;600&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Theme variables (base + specialty color themes) -->
+<link href="/themes/base.css" rel="stylesheet">
+<link href="/themes/luxury-bar/luxury-bar.css" rel="stylesheet">
+<link href="/themes/fantasy-tavern/fantasy-tavern.css" rel="stylesheet">
+<link href="/themes/dive-bar/dive-bar.css" rel="stylesheet">
+<link href="/themes/liquor-store/liquor-store.css" rel="stylesheet">
+<link href="/themes/brewery/brewery.css" rel="stylesheet">
+<link href="/themes/micro-brewery/micro-brewery.css" rel="stylesheet">
+
+<!-- Layout & component styles -->
+<link href="/styles/main.css" rel="stylesheet">
+	<style>
+		body {
+			padding-bottom: 20px;
+			overscroll-behavior: contain;
+		}
+		/*
+		.modal {
+			display: none; 
+			position: fixed; 
+			z-index: 1; 
+			left: 0px;
+			top: 0px;
+			width: 100vw; 
+			/*height: 100vh; 
+			overflow: auto; 
+			background-color: rgb(245,245,245); 
+		}*/
+	
+		.modal-vis {
+			display: block;
+		}*/
+	</style>
+	
+</head>
+<body>
+	<div class="ambient-layer" id="ambientLayer" aria-hidden="true"></div>
+	<!-- Fixed navbar -->
+	<div id="topbar-root"></div>
+
+
+    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+      <div class="container">
+			<button onclick="NewCard()" class="btn btn-primary">New Game</button>
+        </div>
+      </div>
+    </nav>
+
+	<!-- Content -->
+	<div class="container">
+		<div id="GameStats">
+			<div class="text-center" id="perc-crossbones">Chance of Death: 100%</div>
+
+		</div>
+	</div>
+	<div id="GameBoard"></div>
+
+
+	<div class="modal fade" id="gameHowToPlayModal" tabindex="-1" aria-labelledby="gameHowToPlayModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="gameHowToPlayModalLabel">How To Play</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p><b><u>REQUIRES TOUCH SCREEN DEVICE</u></b></p>
+					<p>Take turns revealing tiles by scratching off the grey with your finger and do what they say. Beware the skull and bones. You have to take the punishment if you reveal that.</p>
+					<p>Punishments can be anything to the imagination of the players and each player can have a different punishment. Popular punishments include taking a shot, getting sharpied or becoming the beer bitch.</p>
+					<h1>Image Key:</h1>
+					<div class="container">
+						<div class="row border panel panel-primary">
+							<div class="col-12">
+								<image class="float-start" src="/images/Icons/beer.svg" height="100px" width="100px"></image>
+								<h2 class="h2">Drink 1</h2>
+							</div>
+						</div>
+						<div class="row border panel panel-primary">
+							<div class="col-12">
+								<image class="float-start" src="/images/Icons/beer2.svg" height="100px" width="100px"></image>
+								<h2 class="align-middle">Drink 2</h2>
+							</div>
+						</div>
+						<div class="row border panel panel-primary">
+							<div class="col-12">
+								<image class="float-start" src="/images/Icons/safe.svg" height="100px" width="100px"></image>
+								<h2 class="h2">Safe (do nothing)</h2>
+							</div>
+						</div>
+						<div class="row border panel panel-primary">
+							<div class="col-12">
+								<image class="float-start" src="/images/Icons/repeat.svg" height="100px" width="100px"></image>
+								<h2 class="h2">Go Again</h2>
+							</div>
+						</div>
+						<div class="row border panel panel-primary">
+							<div class="col-12">
+								<image class="float-start" src="/images/Icons/crossbones.svg" height="100px" width="100px"></image>
+								<h2 class="h2">Take The Punishment</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="gameSettingsModal" tabindex="-1" aria-labelledby="gameSettingsModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="gameSettingsModalLabel">Settings</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Adjust the number of each type of scratch off.</p>
+		<p><b>Too many options may cause issues with scrolling.</b> Use the purposeful whitespace on the right hand side of the screen to scroll to avoid accidentally scratching off a tile.</p>
+		
+		<label for="sliderbeer" class="form-label">Drink 1: </label><label for="sliderbeer" class="form-label">8</label>
+		<input type="range" class="form-range settingsSlider" id="sliderbeer" min="0" max="10" value="8" oninput='UpdateSliderLabel(event)'>
+		
+		<label for="sliderbeer2" class="form-label">Drink 2: </label><label for="sliderbeer2" class="form-label">4</label>
+		<input type="range" class="form-range settingsSlider" id="sliderbeer2" min="0" max="10" value="4" oninput='UpdateSliderLabel(event)'>
+		
+		<label for="slidersafe" class="form-label">Safe: </label><label for="slidersafe" class="form-label">5</label>
+		<input type="range" class="form-range settingsSlider" id="slidersafe" min="0" max="10" value="5" oninput='UpdateSliderLabel(event)'>
+		
+		<label for="sliderrepeat" class="form-label">Repeat: </label><label for="sliderrepeat" class="form-label">5</label>
+		<input type="range" class="form-range settingsSlider" id="sliderrepeat" min="0" max="10" value="2" oninput='UpdateSliderLabel(event)'>
+		
+		<label for="slidercrossbones" class="form-label">Crossbones: </label><label for="slidercrossbones" class="form-label">1</label>
+		<input type="range" class="form-range settingsSlider" id="slidercrossbones" min="0" max="10" value="1" oninput='UpdateSliderLabel(event)'>
+				
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- Bootstrap JS via jsDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Game data, then utilities, then behavior, then init -->
+<script defer src="/GameData/games.js"></script>
+<script defer src="/scripts/utils.js"></script>
+<script defer src="/scripts/topbar.js"></script>
+<script defer src="/scripts/theme.js"></script>
+<script defer src="/scripts/render.js"></script>
+<script defer src="/scripts/app.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+	<!--<script src="../../scripts/bootstrap.min.js"></script> -->
+	<div id="modalLogin-placeholder"></div>
+	<script>
+		var options = [];
+	window.onload = (event) => {
+		NewCard();
+		UpdatePercent();
+	}
+
+	
+	function StartDraw(e){
+		e.preventDefault = true;
+		var svg = e.srcElement.closest("svg");
+		var drawGroup = svg.children[0].children[0];
+		var offsetX = svg.getBoundingClientRect().x;
+		var offsetY = svg.getBoundingClientRect().y;
+
+		let imgSrc = e.target.parentElement.children[2].href.baseVal;
+		if (drawGroup.children.length == 0){
+			options.splice(options.indexOf(imgSrc.substring(13).replace(".svg", "")), 1);
+			UpdatePercent();
+		}
+
+		var drawLine = '<circle cx="' + (e.touches[0].clientX - offsetX) + '" cy="' + (e.touches[0].clientY - offsetY) + '" r="25" />';
+		drawGroup.innerHTML += drawLine;
+	}
+	
+	function StopDraw(e){
+		e.preventDefault = false;
+		var svg = e.srcElement.closest("svg");
+		var drawGroup = svg.children[0].children[0];
+		drawLine = "";
+	}
+	
+	function Drawing(e){
+		e.preventDefault();
+		var svg = e.srcElement.closest("svg");
+		var drawGroup = svg.children[0].children[0];
+		var offsetX = svg.getBoundingClientRect().x;
+		var offsetY = svg.getBoundingClientRect().y;
+
+		drawLine = '<circle cx="' + (e.touches[0].clientX - offsetX) + '" cy="' + (e.touches[0].clientY - offsetY) + '" r="25" />';
+		drawGroup.innerHTML += drawLine;
+		
+		
+		if(svg.children[0].children[0].children.length > 20){
+			drawLine = '<rect width="100%" height="100%" />'
+			drawGroup.innerHTML += drawLine;
+			//remove event listener here
+		}
+	}
+	
+	/*
+	svg.addEventListener("touchmove", function (e) {
+		e.preventDefault();
+		var offsetX = svg.getBoundingClientRect().x;
+		var offsetY = svg.getBoundingClientRect().y;
+		drawLine = '<circle cx="' + (e.touches[0].clientX - offsetX) + '" cy="' + (e.touches[0].clientY - offsetY) + '" r="25" />';
+		drawGroup.innerHTML += drawLine;
+	}, false);
+	*/
+	
+	function ToggleModal(mod){
+		var togMod = document.getElementById(mod);
+		togMod.classList.toggle("modal-vis");
+	}
+		
+	function NewCard(){
+		options = [];
+		let sliders = document.getElementsByClassName("settingsSlider");
+		for(let s = 0; s < sliders.length; s++){
+			let img = sliders[s].id.replace('slider', '');
+			for(let ss = 0; ss < sliders[s].value; ss++){
+				options.push(img);
+			}
+		}
+		var repeatNum = [];
+		
+		document.getElementById("GameBoard").innerHTML = "";
+		for (let i=1; i <= options.length; i++){
+			var randNum = RandomNum(0, options.length);
+			var stopRepeat = false;
+			
+			while(!stopRepeat){
+				if(!repeatNum.includes(randNum)){
+					document.getElementById("GameBoard").innerHTML += '<svg width="22vw" height="22vw" ontouchstart="StartDraw(event)" ontouchend="StopDraw(event)" ontouchmove="Drawing(event)">' +
+																		'<defs><clipPath id="drawGroup' + i + '"></clipPath></defs><rect x="0" y="0" width="22vw" height="22vw" stroke="black" fill="gray" stroke-width="5" opacity="1" /><image href="/images/Icons/' + options[randNum] + '.svg" height="100%" width="100%" clip-path="url(#drawGroup' + i + ')" />' +
+																		'</svg>';
+
+					
+					//document.getElementById("svg" + i).innerHTML = '<defs><clipPath id="drawGroup' + i + '"></clipPath></defs><rect x="0" y="0" width="22vw" height="22vw" stroke="black" fill="gray" stroke-width="5" opacity="1" /><image href="' + options[randNum] + '.svg" height="100%" width="100%" clip-path="url(#drawGroup' + i + ')" />';
+					
+					
+					repeatNum[i] = randNum;
+					stopRepeat = true;
+				}
+				else {
+					var randNum = RandomNum(0, options.length);
+					stopRepeat = false;
+				}
+			}	
+		}
+		UpdatePercent();
+	}
+	function RandomNum(min, max) { // min and max included 
+			return Math.floor(Math.random() * (max - min) + min)
+		};
+		
+	function UpdateSliderLabel(e){
+		var sliderVal = e.srcElement.value;
+		e.srcElement.labels[1].innerText = '   ' + sliderVal;
+	}
+	function UpdatePercent(){
+		const counts = groupAndCount(options);
+		$("#perc-beer").text(nanToZero(Math.trunc(counts["beer"] / options.length * 100)) + "%");
+		$("#perc-beer2").text(nanToZero(Math.trunc(counts["beer2"] / options.length * 100)) + "%");
+		$("#perc-safe").text(nanToZero(Math.trunc(counts["safe"] / options.length * 100)) + "%");
+		$("#perc-repeat").text(nanToZero(Math.trunc(counts["repeat"] / options.length * 100)) + "%");
+		$("#perc-crossbones").text("Chance of Death: " + nanToZero(Math.trunc(counts["crossbones"] / options.length * 100)) + "%");
+	}
+
+	function groupAndCount(arr) {
+      if (!Array.isArray(arr)) {
+        throw new TypeError("Input must be an array.");
+    	}
+
+		return arr.reduce((acc, value) => {
+			const key = String(value);
+			acc[key] = (acc[key] || 0) + 1;
+			return acc;
+		}, Object.create(null));
+	}
+	
+	function nanToZero(value) {
+		return isNaN(value) ? 0 : value;
+	}
+	</script>
+</body>
+</html>
