@@ -1,3 +1,53 @@
+/* ---------------- Legal / age gate ---------------- */
+/* Shown once per browser session (sessionStorage, not localStorage) on
+   whichever page is opened first — accepting it persists for every page
+   navigated to afterward, but the tab/browser closing clears it, so it
+   prompts again next time the site is opened. */
+const LEGAL_GATE_KEY = "playbase-legal-accepted";
+
+function legalGateTemplate(){
+  const theme = document.documentElement.getAttribute("data-color-theme") || "default";
+  return `
+<div class="modal fade" id="legalGateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="legalGateLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body legal-gate-body">
+        <div class="legal-gate-logo">
+          <!-- Placeholder mark — swaps per color/holiday theme (scripts/theme.js:
+               legalGateLogoSrc/updateLegalGateLogo) until real brand art exists -->
+          <img src="${legalGateLogoSrc(theme)}" alt="DrinkUp logo placeholder">
+        </div>
+        <h2 id="legalGateLabel" class="legal-gate-title">Before you come in...</h2>
+        <div class="legal-gate-text">
+          <p>DrinkUp is a free collection of drinking games. By continuing, you confirm you are of legal drinking age wherever you're playing from.</p>
+          <p>DrinkUp is not responsible or liable for your actions. Consumption of alcohol is entirely voluntary and at your own discretion — please play responsibly and know your limits.</p>
+          <p>DrinkUp does not use cookies, require an account, or track you. Nor will we ever ask for such information. It's crazy but free actually means free here.</p>
+        </div>
+        <button type="button" class="btn-play-full" id="legalGateAcceptBtn">Accept &amp; Enter</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+let legalGateInstance = null;
+
+function buildLegalGate(){
+  let accepted = null;
+  try { accepted = sessionStorage.getItem(LEGAL_GATE_KEY); } catch (e) { /* storage unavailable */ }
+  if (accepted === "true") return;
+
+  document.body.insertAdjacentHTML("beforeend", legalGateTemplate());
+  legalGateInstance = new bootstrap.Modal(document.getElementById("legalGateModal"));
+
+  document.getElementById("legalGateAcceptBtn").addEventListener("click", () => {
+    try { sessionStorage.setItem(LEGAL_GATE_KEY, "true"); } catch (e) { /* storage unavailable */ }
+    legalGateInstance.hide();
+  });
+
+  legalGateInstance.show();
+}
+
 const state = { category: "All" };
 
 /* Games with disabled: true are excluded everywhere — grid, chips,

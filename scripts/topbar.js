@@ -103,6 +103,13 @@ function renderTopbar(){
                   <option value="fantasy-tavern">Fantasy Tavern</option>
                   <option value="dive-bar">Dive Bar</option>
                   <option value="micro-brewery">Micro Brewery</option>
+                  <optgroup label="Seasonal">
+                    <option value="st-paddy">St. Paddy's Day</option>
+                    <option value="independence-day">Independence Day</option>
+                    <option value="halloween">Halloween</option>
+                    <option value="christmas">Christmas</option>
+                    <option value="new-year">New Year's</option>
+                  </optgroup>
                 </select>
               </div>
             </div>

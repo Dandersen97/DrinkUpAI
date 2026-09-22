@@ -1,4 +1,7 @@
-/* Ambient floating icons per color theme — purely decorative */
+/* Ambient floating icons per color theme — purely decorative. Holiday
+   themes (halloween, christmas, st-paddy, easter, independence-day,
+   new-year) have no entry yet and fall back to AMBIENT_ICONS.default
+   below — add a themed icon set here once holiday-specific art exists. */
 const AMBIENT_ICONS = {
   "default": ["/images/Icons/3drinks.svg", 
               "/images/Icons/beer.svg", 
@@ -62,9 +65,64 @@ const AMBIENT_ICONS = {
                     "/images/Icons/hops.svg",
                     "/images/Icons/tank1.svg",
                     "/images/Icons/tank2.svg"
-                ]
+                ],
+  "st-paddy": ["/images/Logos/stpaddy_2026.svg",
+               "/images/Icons/bottle3pack3.svg",
+               "/images/Icons/vomiting.svg",
+               "/images/Icons/clover.svg",
+               "/images/Icons/cloverParade.svg",
+               "/images/Icons/goldPotRainbow.svg",
+               "/images/Icons/bar5.svg"
+              ],
+  "independence-day": [
+                  "/images/Icons/beer-mug.svg",
+                  "/images/Icons/eagle.svg",
+                  "/images/Icons/baseball.svg",
+                  "/images/Icons/statue_liberty.svg",
+                  "/images/Icons/fireworks.svg",
+                  "/images/Icons/fireworks2.svg",
+                  "/images/Icons/fireworks3.svg",
+                  "/images/Icons/fireworks4.svg",
+                  "/images/Icons/hotdog.svg",
+                  "/images/Icons/party.svg"
+              ],
+  "halloween": ["/images/Logos/halloween_2021.svg",
+                "/images/Icons/crossbones.svg",
+                "/images/Icons/pirateSkull.svg",
+                "/images/Icons/spider.svg",
+                "/images/Icons/cauldron.svg",
+                "/images/Icons/witch.svg",
+                "/images/Icons/reaper.svg",
+                "/images/Icons/clown.svg",
+                "/images/Icons/cleaver.svg",
+                "/images/Icons/zombieHand.svg",
+                "/images/Icons/candycorn.svg",
+                "/images/Icons/bats.svg"
+              ],
+  "christmas": ["/images/Logos/christmas_2021.svg",
+                "/images/Icons/winter_cap.svg",
+                "/images/Icons/winter_cap2.svg",
+                "/images/Icons/mistletoe.svg",
+                "/images/Icons/festiveTree.svg",
+                "/images/Icons/menorah.svg",
+                "/images/Icons/candycane.svg"
+              ],
+  "new-year": ["/images/Icons/party.svg",
+               "/images/Icons/partyChampagne.svg",
+               "/images/Icons/earth-face.svg",
+               "/images/Icons/champagne.svg",
+               "/images/Icons/couple.svg",
+               "/images/Icons/musical-notes.svg",
+               "/images/Icons/party.svg",
+               "/images/Icons/fireworks4.svg"
+              ]
 };
-
+const THEME_LOGOS = {
+ "default": "/images/Logos/DRINKUP1.svg",
+ "halloween": "/images/Logos/halloween_2021.svg",
+ "christmas": "/images/Logos/christmas_2021.svg",
+ "st-paddy": "/images/Logos/stpaddy_2026.svg"
+}
 /* ---------------- Theme (light / dark) ---------------- */
 function applyTheme(theme){
   document.documentElement.setAttribute("data-theme", theme);
@@ -117,6 +175,24 @@ function buildAmbientLayer(theme){
   layer.innerHTML = html;
 }
 
+/* Legal-gate placeholder logo (see .legal-gate-logo / buildLegalGate() in
+   scripts/render.js) — reuses each theme's first ambient icon rather than
+   a separate curated image, so it stays in sync with AMBIENT_ICONS above
+   and needs no upkeep of its own. Swap in real per-theme brand art later
+   by giving this its own lookup table instead. */
+function legalGateLogoSrc(theme){
+  const glyphs = THEME_LOGOS[theme] || THEME_LOGOS.default;
+  return glyphs;
+}
+
+/* No-op if the gate isn't in the DOM — it's only injected once, when the
+   visitor hasn't yet accepted it this session (see buildLegalGate()). */
+function updateLegalGateLogo(theme){
+  const img = document.querySelector("#legalGateModal .legal-gate-logo img");
+  if (!img) return;
+  img.src = legalGateLogoSrc(theme);
+}
+
 /* Re-rolls one ambient icon's image, size, vertical position, speed, and
    opacity — called each time its floatAcross pass finishes, so it never
    repeats the exact same appearance twice in a row. */
@@ -139,23 +215,88 @@ function rerollAmbientIcon(img){
 
 
 
+/* ---------------- Seasonal / holiday themes ---------------- */
+/* Each entry's `active(date)` returns true when `date` falls inside that
+   holiday's window. Checked in listed order — the first match wins — so
+   list narrower/higher-priority holidays before wider ones if windows
+   could ever overlap. These are approximate placeholder windows; adjust
+   freely once real holiday art/copy exists for a theme. */
+function isMonthDayInWindow(date, startMonth, startDay, endMonth, endDay){
+  const md = (date.getMonth() + 1) * 100 + date.getDate();
+  const start = startMonth * 100 + startDay;
+  const end = endMonth * 100 + endDay;
+  return start <= end ? (md >= start && md <= end) : (md >= start || md <= end);
+}
+
+/* Anonymous Gregorian algorithm — Easter Sunday varies year to year
+   (late March to late April), so it can't use a fixed month/day window. */
+function easterSunday(year){
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day);
+}
+
+const HOLIDAY_THEMES = [
+  { theme: "st-paddy", active: d => isMonthDayInWindow(d, 3, 10, 3, 17) },
+  /*//Easter unused but keeping logic
+  { theme: "easter", active: d => {
+      const sunday = easterSunday(d.getFullYear());
+      const start = new Date(sunday); start.setDate(sunday.getDate() - 9);
+      const end = new Date(sunday); end.setDate(sunday.getDate() + 1);
+      return d >= start && d <= end;
+    } },
+  */
+  { theme: "independence-day", active: d => isMonthDayInWindow(d, 6, 28, 7, 5) },
+  { theme: "halloween", active: d => isMonthDayInWindow(d, 10, 16, 11, 6) },
+  { theme: "christmas", active: d => isMonthDayInWindow(d, 12, 11, 12, 30) },
+  { theme: "new-year", active: d => isMonthDayInWindow(d, 12, 31, 1, 2) }
+];
+
+/* Returns the active holiday theme for `date` (defaults to now), or
+   "default" when none match. */
+function seasonalTheme(date = new Date()){
+  const match = HOLIDAY_THEMES.find(h => h.active(date));
+  return match ? match.theme : "default";
+}
+
 /* ---------------- Color theme (Default + bar/tavern skins) ---------------- */
-function applyColorTheme(theme){
+function applyColorTheme(theme, { persist = true } = {}){
   document.documentElement.setAttribute("data-color-theme", theme);
   const isDefault = theme === "default";
   //document.getElementById("themeToggle").disabled = !isDefault;
   //document.getElementById("darkModeSwitch").disabled = !isDefault;
   buildAmbientLayer(theme);
-  try { localStorage.setItem("playbase-color-theme", theme); } catch (e) { /* storage unavailable */ }
+  updateLegalGateLogo(theme);
+  if (persist){
+    try { localStorage.setItem("playbase-color-theme", theme); } catch (e) { /* storage unavailable */ }
+  }
   try { themeChange(theme); } catch (e) { /* game doesn't use theme change */ }
 }
 
+/* No saved preference falls back to whatever holiday is currently in
+   season (see HOLIDAY_THEMES above) instead of always "default" — and
+   that automatic pick is never persisted, so it keeps re-evaluating
+   against today's date on every future visit instead of getting stuck
+   on the first holiday it ever landed on. An explicit pick from the
+   dropdown always persists and always wins over the seasonal default. */
 function initColorTheme(){
   let saved = null;
   try { saved = localStorage.getItem("playbase-color-theme"); } catch (e) { /* storage unavailable */ }
-  const theme = saved || "default";
+  const theme = saved || seasonalTheme();
   document.getElementById("themeSelect").value = theme;
-  applyColorTheme(theme);
+  applyColorTheme(theme, { persist: false });
 }
 
 document.getElementById("themeSelect").addEventListener("change", (e) => {

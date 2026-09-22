@@ -120,7 +120,7 @@ let imgSkull = document.getElementById("keySkull");
 		//$("#perc-beer2").text(nanToZero(Math.trunc(counts["beer2"] / options.length * 100)) + "%");
 		//$("#perc-safe").text(nanToZero(Math.trunc(counts["safe"] / options.length * 100)) + "%");
 		//$("#perc-repeat").text(nanToZero(Math.trunc(counts["repeat"] / options.length * 100)) + "%");
-		document.getElementById('perc-crossbones').innerText = "Chance of Death: " + nanToZero(Math.trunc(counts["crossbones"] / options.length * 100)) + "%";
+		document.getElementById('perc-crossbones').innerText = "Chance of Punishment: " + nanToZero(Math.trunc(counts["crossbones"] / options.length * 100)) + "%";
         //$("#perc-crossbones").text("Chance of Death: " + nanToZero(Math.trunc(counts["crossbones"] / options.length * 100)) + "%");
 	}
 
@@ -154,30 +154,35 @@ function themeChange(theme){
 				   : theme == 'fantasy-tavern' ?'/images/Icons/beerStein2.svg'
 				   : theme == 'dive-bar' ?'/images/Icons/beer-mug.svg'
 				   : theme == 'micro-brewery' ?'/images/Icons/pint.svg'
+				   : theme == 'halloween' ?'/images/Icons/spider.svg'
 				   : '/images/Icons/beer.svg';
 	let newKeyBeer2 = theme == 'default' ? '/images/Icons/beer2.svg'
                 	: theme == 'luxury-bar' ?'/images/Icons/martiniGlasses.svg'
 				    : theme == 'fantasy-tavern' ?'/images/Icons/beerBarrel.svg'
 				    : theme == 'dive-bar' ?'/images/Icons/beerGlassAndPitcher.svg'
 				    : theme == 'micro-brewery' ?'/images/Icons/beer4.svg'
+					: theme == 'halloween' ?'/images/Icons/bats.svg'
 				    : '/images/Icons/beer2.svg';
 	let newKeySafe = theme == 'default' ? '/images/Icons/safe.svg'
                 	: theme == 'luxury-bar' ?'/images/Icons/safe.svg'
 				    : theme == 'fantasy-tavern' ?'/images/Icons/safe.svg'
 				    : theme == 'dive-bar' ?'/images/Icons/barStool.svg'
 				    : theme == 'micro-brewery' ?'/images/Icons/hops.svg'
+					: theme == 'halloween' ?'/images/Icons/zombieHand.svg'
 				    : '/images/Icons/safe.svg';
 	let newKeyAgain = theme == 'default' ? '/images/Icons/repeat.svg'
                 	: theme == 'luxury-bar' ?'/images/Icons/categories.svg'
 				    : theme == 'fantasy-tavern' ?'/images/Icons/repeat-again.svg'
 				    : theme == 'dive-bar' ?'/images/Icons/repeat2.svg'
 				    : theme == 'micro-brewery' ?'/images/Icons/repeat2.svg'
+					: theme == 'halloween' ?'/images/Icons/repeat2.svg'
 				    : '/images/Icons/repeat.svg';
 	let newKeySkull = theme == 'default' ? '/images/Icons/crossbones.svg'
                 	: theme == 'luxury-bar' ?'/images/Icons/crackedGlass.svg'
 				    : theme == 'fantasy-tavern' ?'/images/Icons/crossbones.svg'
 				    : theme == 'dive-bar' ?'/images/Icons/vomiting.svg'
 				    : theme == 'micro-brewery' ?'/images/Icons/toilet.svg'
+					: theme == 'halloween' ?'/images/Icons/crossbones.svg'
 				    : '/images/Icons/crossbones.svg';
 
 	let images = document.querySelectorAll('img');
@@ -195,7 +200,6 @@ function themeChange(theme){
 function updateBoardImages(){
 let svgs = document.querySelectorAll('svg image');
 	svgs.forEach(svg => {
-		console.log(svg);
 		if (svg.classList.contains('beer')) {svg.setAttribute('href', imgBeer.getAttribute('src'));}
 		if (svg.classList.contains('beer2')) {svg.setAttribute('href', imgBeer2.getAttribute('src'));}
 		if (svg.classList.contains('safe')) {svg.setAttribute('href', imgSafe.getAttribute('src'));}

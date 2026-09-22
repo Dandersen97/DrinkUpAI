@@ -1,0 +1,32 @@
+:root[data-color-theme="independence-day"][data-theme="dark"]{
+  --bg: #0a1020;
+  --surface: #101a30;
+  --surface-2: #16223d;
+  --surface-hover: #1e2d4d;
+  --border: rgba(255,255,255,0.14);
+  --border-strong: rgba(255,255,255,0.24);
+  --text: #f5f7fb;
+  --text-soft: #b9c4dd;
+  --text-dim: #7c88a8;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,10,0.6);
+  --accent: #d1373f;
+  --amber: #3f6fd1;
+  --font-display: 'Bebas Neue', sans-serif;
+}
+
+
+:root[data-color-theme="independence-day"][data-theme="light"]{
+  --bg: #d8d8d8;
+  --surface: #acacac;
+  --surface-2: #5f6063;
+  --surface-hover: #707070;
+  --border: rgba(255,255,255,0.14);
+  --border-strong: rgba(255,255,255,0.24);
+  --text: #9c0000;
+  --text-soft: #0041da;
+  --text-dim: #5582ff;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,10,0.6);
+  --accent: #94030a;
+  --amber: #3f6fd1;
+  --font-display: 'Bebas Neue', sans-serif;
+}

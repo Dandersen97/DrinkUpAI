@@ -1,0 +1,32 @@
+:root[data-color-theme="christmas"][data-theme="dark"]{
+  --bg: #0c1410;
+  --surface: #131f19;
+  --surface-2: #1a2a21;
+  --surface-hover: #24382c;
+  --border: rgba(208,49,58,0.18);
+  --border-strong: rgba(208,49,58,0.3);
+  --text: #f3f6f2;
+  --text-soft: #cfe0d3;
+  --text-dim: #7fa088;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #d0313a;
+  --amber: #d4af37;
+  --font-display: 'Cinzel', serif;
+}
+
+
+:root[data-color-theme="christmas"][data-theme="light"]{
+  --bg: #d2ffe9;
+  --surface: #a1e0a6;
+  --surface-2: #abffa3;
+  --surface-hover: #24382c;
+  --border: rgba(201, 0, 10, 0.459);
+  --border-strong: rgba(155, 0, 8, 0.527);
+  --text: #1a6102;
+  --text-soft: #013b0f;
+  --text-dim: #b63838;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #ab000a;
+  --amber: #d4af37;
+  --font-display: 'Cinzel', serif;
+}

@@ -1,0 +1,31 @@
+:root[data-color-theme="st-paddy"][data-theme="dark"]{
+  --bg: #0a140d;
+  --surface: #0f1f14;
+  --surface-2: #15291a;
+  --surface-hover: #1c3422;
+  --border: rgba(35,163,90,0.18);
+  --border-strong: rgba(35,163,90,0.3);
+  --text: #f1f7ee;
+  --text-soft: #bfe0c6;
+  --text-dim: #74a482;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #23a35a;
+  --amber: #d4af37;
+  --font-display: 'Special Elite', monospace;
+}
+
+:root[data-color-theme="st-paddy"][data-theme="light"]{
+  --bg: #d0ffdf;
+  --surface: #639b74;
+  --surface-2: #068124;
+  --surface-hover: #1c3422;
+  --border: rgba(35,163,90,0.18);
+  --border-strong: rgba(35,163,90,0.3);
+  --text: #0b2200;
+  --text-soft: #003b0d;
+  --text-dim: #74a482;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.6);
+  --accent: #16753f;
+  --amber: #d4af37;
+  --font-display: 'Special Elite', monospace;
+}

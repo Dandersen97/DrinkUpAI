@@ -1,0 +1,31 @@
+:root[data-color-theme="halloween"][data-theme="dark"]{
+  --bg: #0d0a12;
+  --surface: #17121f;
+  --surface-2: #1f1829;
+  --surface-hover: #281f34;
+  --border: rgba(255,140,0,0.16);
+  --border-strong: rgba(255,140,0,0.3);
+  --text: #f3ead6;
+  --text-soft: #c9a876;
+  --text-dim: #8a6f4e;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.7);
+  --accent: #ff7518;
+  --amber: #8b3fd1;
+  --font-display: 'MedievalSharp', cursive;
+}
+
+:root[data-color-theme="halloween"][data-theme="light"]{
+  --bg: #919191;
+  --surface: #a5a0af;
+  --surface-2: #6a6670;
+  --surface-hover: #281f34;
+  --border: rgba(255,140,0,0.16);
+  --border-strong: rgba(255,140,0,0.3);
+  --text: #572700;
+  --text-soft: #643c00;
+  --text-dim: #8a6f4e;
+  --shadow-elevated: 0 24px 48px -22px rgba(0,0,0,0.7);
+  --accent: #ff7518;
+  --amber: #8b3fd1;
+  --font-display: 'MedievalSharp', cursive;
+}

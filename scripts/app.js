@@ -1,4 +1,6 @@
 /* ---------------- Init ---------------- */
+buildLegalGate();
+
 initTheme();
 initColorTheme();
 

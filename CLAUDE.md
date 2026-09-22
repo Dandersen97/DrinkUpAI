@@ -17,6 +17,11 @@ styles/
 themes/
   base.css               :root radius/font vars, dark/light theme variables, shared accent palette
   <theme-name>/<theme-name>.css   One specialty color theme per subfolder (e.g. luxury-bar, fantasy-tavern, dive-bar, liquor-store, brewery, micro-brewery)
+  <holiday-name>/<holiday-name>.css   Same color-theme mechanism, but seasonal placeholders (halloween,
+                          christmas, st-paddy, easter, independence-day, new-year) — see
+                          HOLIDAY_THEMES in scripts/theme.js, which auto-selects one of these as the
+                          default color theme when today's date falls in its window and the visitor
+                          has no saved theme preference
 GameData/
   games.js               const GAMES = [...] and CATEGORY_COLORS — the single source of truth for game cards.
                           Fields: id, title, short_desc (grid card blurb), long_desc (modal blurb),
@@ -34,9 +39,10 @@ scripts/
   theme.js                Light/dark toggle, specialty color-theme switching, reduce-motion switch, and
                           the ambient floating icons — each icon re-rolls its image/size/vertical
                           position/speed every time it finishes floating across the screen
-  render.js                Chips, card grid, and detail modal/carousel — all driven by
-                          VISIBLE_GAMES (GAMES filtered to disabled: false/absent). Disabled games
-                          are excluded everywhere; there is no way to view them in the UI.
+  render.js                Chips, card grid, detail modal/carousel, and the legal/age gate modal —
+                          the grid/chips/carousel are all driven by VISIBLE_GAMES (GAMES filtered to
+                          disabled: false/absent). Disabled games are excluded everywhere; there is
+                          no way to view them in the UI.
   app.js                  Init sequence only — calls the init functions from theme.js/render.js in order
   devlog.js                Builds the Bootstrap accordion on devlog.html from DevlogData/devlog.js —
                           only loaded on that page
@@ -57,6 +63,8 @@ Scripts are loaded as plain global-scope files via ordered `<script defer>` tags
 
 - **Add a game**: push a new object onto the `GAMES` array in `GameData/games.js` with `short_desc` (grid card) and `long_desc` (detail modal). The grid, chips, quick-jump menu, and detail carousel all update automatically — no other code changes needed.
 - **Hide a game without deleting it**: set `disabled: true` on its entry. It's excluded everywhere — main grid, category chips, quick-jump nav, game count, and detail carousel — with no way to view it in the UI. Flip the flag back to `false` (or remove it) to bring it back.
-- **Add a color theme**: create `themes/<name>/<name>.css` with a `:root[data-color-theme="<name>"]{...}` block (copy an existing theme file as a template), add a matching `<link>` in `index.html`'s `<head>`, add an `<option>` to the `#themeSelect` dropdown (in `scripts/topbar.js`), and optionally add entries to `CATEGORY_COLORS` (GameData/games.js) or `AMBIENT_ICONS` (scripts/theme.js) if the theme should have its own ambient icon set.
+- **Add a color theme**: create `themes/<name>/<name>.css` with a `:root[data-color-theme="<name>"]{...}` block (copy an existing theme file as a template), add a matching `<link>` to every page's `<head>` (all of them link all theme CSS files up front), add an `<option>` to the `#themeSelect` dropdown (in `scripts/topbar.js`), and optionally add entries to `CATEGORY_COLORS` (GameData/games.js) or `AMBIENT_ICONS` (scripts/theme.js) if the theme should have its own ambient icon set.
+- **Add/adjust a holiday theme**: same mechanics as a color theme (CSS file + `<link>` on every page + `#themeSelect` option), plus an entry in the `HOLIDAY_THEMES` array in `scripts/theme.js` with an `active(date)` predicate deciding when that theme is "in season". `initColorTheme()` only falls back to `seasonalTheme()` when the visitor has no saved `playbase-color-theme` — that automatic pick is never written to localStorage (`applyColorTheme(theme, { persist: false })`), so it keeps tracking the current date on every visit instead of sticking to whichever holiday a visitor happened to land on first. Picking any theme from the dropdown always persists and overrides the seasonal default.
 - **Replace placeholder art**: swap the `image` URL in a game's object in `GameData/games.js` for a local path under `images/Logos/` or `images/Icons/`.
 - **Wire up a game's Settings / How To Play modals**: the shared top bar (`scripts/topbar.js`) has generic "Settings" and "How To Play" menu buttons that open `#gameSettingsModal` / `#gameHowToPlayModal` if the current page defines them — otherwise the click is a no-op. Add a Bootstrap modal with that exact `id` to the game's own page (see `Games/WheelOfMisfortune/index.html` for an example) to hook it up; content is entirely up to the game.
+- **Legal/age gate**: `buildLegalGate()` (scripts/render.js, called first thing in `scripts/app.js`'s init sequence) injects and shows a static-backdrop, non-dismissible-except-by-button modal on whichever page is opened first, gating the site behind an "Accept" button. Acceptance is written to `sessionStorage` (`playbase-legal-accepted`), not `localStorage`, on purpose — it carries across page navigations and refreshes within the same browser session/tab but clears when the browser or tab is closed, so it prompts again next time the site is opened. The logo slot (`.legal-gate-logo`) currently points at a generic placeholder icon (`images/Icons/partyChampagne.svg`) — swap its `src` for real brand art whenever that's ready.
