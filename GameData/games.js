@@ -44,7 +44,7 @@ const GAMES = [
     long_desc: "<p>A fun beginning of the night game. As its name suggests, you spin a wheel and enjoy the misfortune. You may have to drink, give a drink, take a dare, the possibilities are near endless as you can use our defaults or (eventually) enter your own wheel challenges.<br><br>Now with 50+ options!</p>",
     categories: ["Social","Icebreaker"],
     image: "/images/Logos/wheel_of_misfortune.svg",
-    url: "Games/WheelOfMisfortune/",
+    url: "/Games/WheelOfMisfortune/",
     players: "2P+",
     disabled: false
   },
@@ -77,7 +77,7 @@ const GAMES = [
     long_desc: "<p>Just like the childrens game but with alcohol. A grid is layed before you of facedown cards. You must pick 2 cards and if they match remove them from the game and give a the drink the match says, and go again. If they differ, take the drink, turn them back face down, and it's the next players turn to pick. Sometimes there's multiple matches for a set of cards.</p>",
     categories: ["Casual"],
     image: "/images/Logos/memory.svg",
-    url: "#",
+    url: "/Games/Memory/",
     players: "2P+",
     disabled: false
   },

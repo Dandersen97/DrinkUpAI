@@ -363,6 +363,13 @@ spinData = {
 			"Icon":"abc",
 			"Color":"#cdf09c",
 			"MiniWheel":[]
+		},
+		{
+			"ID":"Take It To 11!",
+			"Desc":"Split and share 11 drinks between all players",
+			"Icon":"guitar",
+			"Color":"#a12e00ff",
+			"MiniWheel":[]
 		}
 	]
 }

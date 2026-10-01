@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DrinkUp!</title>
+
+<!-- Bootstrap 5 via jsDelivr -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Cinzel:wght@600;700&family=MedievalSharp&family=Special+Elite&family=Bebas+Neue&family=Oswald:wght@500;600&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Theme variables (base + specialty color themes) -->
+<link href="/themes/base.css" rel="stylesheet">
+<link href="/themes/luxury-bar/luxury-bar.css" rel="stylesheet">
+<link href="/themes/fantasy-tavern/fantasy-tavern.css" rel="stylesheet">
+<link href="/themes/dive-bar/dive-bar.css" rel="stylesheet">
+<link href="/themes/liquor-store/liquor-store.css" rel="stylesheet">
+<link href="/themes/brewery/brewery.css" rel="stylesheet">
+<link href="/themes/micro-brewery/micro-brewery.css" rel="stylesheet">
+
+<!-- Holiday themes (placeholders — see scripts/theme.js for seasonal auto-default) -->
+<link href="/themes/halloween/halloween.css" rel="stylesheet">
+<link href="/themes/christmas/christmas.css" rel="stylesheet">
+<link href="/themes/st-paddy/st-paddy.css" rel="stylesheet">
+<link href="/themes/independence-day/independence-day.css" rel="stylesheet">
+<link href="/themes/new-year/new-year.css" rel="stylesheet">
+
+<!-- Layout & component styles -->
+<link href="/styles/main.css" rel="stylesheet">
+
+</head>
+<body>
+<style>
+		.card-org {
+			display:block;
+			position: relative;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+		
+		.card-default {
+			transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transition-property: transform;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+			border: 1px solid black;
+		}
+		
+        /* unused placeholder
+		.card-back {
+			
+		}
+		*/
+		.card-front {
+			transform: rotateY(180deg);
+			background-color: blue;	
+			position: relative;
+		}
+		
+		#GameBoard {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		
+		.match {
+			background-color: gray;
+			filter: opacity(50%);
+		}
+
+		.flippedf {
+			transform: rotateY(0deg);
+		}
+		.flippedb {
+			transform: rotateY(180deg);
+		}
+	</style>
+<div class="ambient-layer" id="ambientLayer" aria-hidden="true"></div>
+
+<!-- ============ TOP BAR (injected by scripts/topbar.js) ============ -->
+<div id="topbar-root"></div>
+
+
+	<!-- MAIN BODY DIV -->
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-auto d-flex justify-content-center">
+				<h1 id="Timer">5</h1>
+			</div>
+		</div>
+		<div id="gameboard"></div>
+	</div>
+	
+
+<!-- ============ FOOTER (injected by scripts/footer.js) ============ -->
+<div id="footer-root"></div>
+	<div class="modal fade" id="gameHowToPlayModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">How To Play</h5>
+				</div>
+				<div class="modal-body">
+					<p>When you click the start button all the small tiles will be revealed. You will have 5 seconds to memorize the images. When time is up all small tiles will flip back over and the large tile will be revealed. Take turns flipping a single small tile. Tap a tile to flip them over. If it matches the big tile give a drink and go again, if they differ take a drink and next players turn. The big tile will then change to a new image. (sometimes there are more than 1 matching set)</p>
+					<p>Time, gameboard size, and drinking rules can be adjusted for prefered experience.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="gameSettingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Settings</h5>
+				</div>
+				<div class="modal-body">
+					<label id="GameTimerSliderLabel" for="GameTimeSlider" class="form-label">Timer: 5 seconds</label>
+					<input type="range" class="form-range" id="GameTimeSlider" value="5" min="1" max="20" step="1"  oninput="UpdateLabelTimerSlider(event)">
+				</div>
+				<div class="modal-body">
+					<label id="GameSizeSliderLabel" for="GameSizeSlider" class="form-label">Difficulty: NORMAL (4x4)</label>
+					<input type="range" class="form-range" id="GameSizeSlider" value="1" min="0" max="3" step="1"  oninput="UpdateLabelSizeSlider(event)">
+				</div>
+				<div class="modal-body">
+					<label id="GameRulesSliderLabel" for="GameRulesSlider" class="form-label">Drinking Rules: Give 1 Take 1</label>
+					<input type="range" class="form-range" id="GameRulesSlider" value="0" min="0" max="3" step="1"  oninput="UpdateGameRulesSlider(event)">
+					<p class="GameRulesDesc">(Give/Take 1 drink per guess)</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="MatchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+
+				<div class="modal-content" style="overflow-y: auto;">
+					<div>
+					<img id="MatchModalImg"  style="width: 50%;" class="rounded float-start" />
+					<img id="MatchModalImgPrim"  style="width: 50%;" class="rounded float-end" />
+					</div>
+					<span></span>
+					<h1 id="MatchModalTitle">Test 1</h1>
+					<button id="MatchModalBtn" data-bs-dismiss="modal"  class="btn btn-lg btn-primary">Close</button>
+					
+					<h3 id="MatchModalDesc"></h3>
+					<br>
+					<h3 class="GameRulesDesc">(Give/Take 1 drink per guess)</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Bootstrap JS via jsDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Game data, then utilities, then behavior, then init -->
+<script defer src="/GameData/games.js"></script>
+<script defer src="/scripts/utils.js"></script>
+<script defer src="/scripts/topbar.js"></script>
+<script defer src="/scripts/footer.js"></script>
+<script defer src="/scripts/theme.js"></script>
+<script defer src="/scripts/render.js"></script>
+<script defer src="/scripts/app.js"></script>
+<script defer src="game.js"></script>
+</body>
+</html>
